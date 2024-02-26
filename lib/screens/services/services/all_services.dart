@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/utilities/list.dart';
@@ -33,7 +32,7 @@ class _AllServicesState extends State<AllServices> {
                 Container(
                   height: 200,
                   width: 200,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("assets/images/van.png"),
                           fit: BoxFit.cover)),
@@ -43,7 +42,7 @@ class _AllServicesState extends State<AllServices> {
             ListView.separated(
               itemCount: serviceimages.length,
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {},
@@ -68,7 +67,7 @@ class _AllServicesState extends State<AllServices> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Spacer(),
+                            const Spacer(),
                             SizedBox(
                               height: 150,
                               width: 150,

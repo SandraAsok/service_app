@@ -34,6 +34,7 @@ class _AdditionalServicesState extends State<AdditionalServices> {
     const Rental(),
     const Vehicle(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
