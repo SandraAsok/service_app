@@ -16,31 +16,52 @@ class _ElectricalState extends State<Electrical> {
     "Short Circuit",
     "Distribution Board/MSB",
   ];
+  List electricalIcon = [
+    Icon(
+      Icons.electrical_services,
+      color: theme_color,
+    ),
+    Icon(
+      Icons.ac_unit_outlined,
+      color: theme_color,
+    ),
+    Icon(
+      Icons.wind_power_rounded,
+      color: theme_color,
+    ),
+    Icon(
+      Icons.electric_bolt_outlined,
+      color: theme_color,
+    ),
+    Icon(
+      Icons.computer_outlined,
+      color: theme_color,
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.separated(
-              itemCount: electricaltext.length,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return GestureDetector(
-                    onTap: () {},
-                    child: ListTile(
-                      leading: CircleAvatar(),
-                    ));
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return space;
-              },
-            ),
-          ],
-        ),
-      ),
+      body: Column(children: [
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: electricaltext.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: GestureDetector(
+                onTap: () {},
+                child: ListTile(
+                  leading: electricalIcon[index],
+                  title: Text(
+                    electricaltext[index],
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            );
+          },
+        )
+      ]),
     );
   }
 }

@@ -32,6 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: null
+  google_nav_bar: ^5.0.6
   swipeable_button_view: ^0.0.2
   table_calendar: ^3.1.0
 

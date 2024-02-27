@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:service_app/screens/bookings/calender.dart';
 import 'package:service_app/screens/home/home.dart';
 import 'package:service_app/screens/settings/settings.dart';
@@ -39,21 +40,20 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: GNav(
           backgroundColor: theme_color.withOpacity(0.7),
-          currentIndex: _currentIndex,
-          onTap: _onTabTapped,
-          items: [
-            BottomNavigationBarItem(
+          selectedIndex: _currentIndex,
+          activeColor: Colors.white,
+          onTabChange: _onTabTapped,
+          tabs: [
+            GButton(
                 backgroundColor: theme_color.withOpacity(0.7),
-                icon: const Icon(Icons.home),
-                label: 'Home'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_month_outlined), label: 'Bookings'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.support_agent), label: 'Support'),
-            const BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings'),
+                icon: Icons.home,
+                text: 'Home'),
+            const GButton(
+                icon: Icons.calendar_month_outlined, text: 'Bookings'),
+            const GButton(icon: Icons.support_agent, text: 'Support'),
+            const GButton(icon: Icons.settings, text: 'Settings'),
           ]),
     );
   }
