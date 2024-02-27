@@ -1,15 +1,46 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:service_app/utilities/utilities.dart';
 
-class Plumping extends StatelessWidget {
+class Plumping extends StatefulWidget {
   const Plumping({super.key});
 
   @override
+  State<Plumping> createState() => _PlumpingState();
+}
+
+class _PlumpingState extends State<Plumping> {
+  final List<String> plumpingtext = [
+    "General Plumping Works",
+    "Bathroom Water Supplies",
+    "Water Leakage",
+    "Filter Fixing",
+  ];
+  List plumpingIcon = [
+    Icon(Icons.plumbing, color: theme_color),
+    Icon(Icons.bathtub, color: theme_color),
+    Icon(Icons.waterfall_chart_rounded, color: theme_color),
+    Icon(Icons.filter_alt, color: theme_color),
+  ];
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("Plumping"),
+      body: ListView.builder(
+        itemCount: plumpingtext.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: GestureDetector(
+              onTap: () {},
+              child: ListTile(
+                leading: plumpingIcon[index],
+                title: Text(
+                  plumpingtext[index],
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

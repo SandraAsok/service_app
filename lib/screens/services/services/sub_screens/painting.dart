@@ -1,13 +1,16 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
-class Painting extends StatelessWidget {
+class Painting extends StatefulWidget {
   const Painting({super.key});
 
   @override
+  State<Painting> createState() => _PaintingState();
+}
+
+class _PaintingState extends State<Painting> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text("Painting"),
       ),

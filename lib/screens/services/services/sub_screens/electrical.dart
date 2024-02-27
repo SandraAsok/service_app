@@ -54,7 +54,7 @@ class _ElectricalState extends State<Electrical> {
                   leading: electricalIcon[index],
                   title: Text(
                     electricaltext[index],
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
