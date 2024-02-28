@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +33,8 @@ class _WelcomeState extends State<Welcome> {
               SizedBox(
                 height: size.height / 2,
                 width: double.infinity,
-                child: Image(image: AssetImage("assets/images/welcome.png")),
+                child:
+                    const Image(image: AssetImage("assets/images/welcome.png")),
               ),
             ],
           ),
@@ -68,7 +67,7 @@ class _WelcomeState extends State<Welcome> {
                       await Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (context) => SignUp(),
+                              builder: (context) => const SignUp(),
                               fullscreenDialog: false));
                       setState(() {
                         isfinish = false;
@@ -76,19 +75,19 @@ class _WelcomeState extends State<Welcome> {
                     },
                     isFinished: isfinish,
                     onWaitingProcess: () {
-                      Future.delayed(Duration(seconds: 2), () {
+                      Future.delayed(const Duration(seconds: 2), () {
                         setState(() {
                           isfinish = true;
                         });
                       });
                     },
                     activeColor: Colors.white,
-                    buttonWidget: Icon(
+                    buttonWidget: const Icon(
                       Icons.arrow_forward_ios_outlined,
                       color: Colors.black,
                     ),
                     buttonText: "GET STARTED",
-                    buttontextstyle: TextStyle(
+                    buttontextstyle: const TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),

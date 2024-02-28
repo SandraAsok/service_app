@@ -10,7 +10,8 @@ class Painting extends StatefulWidget {
 class _PaintingState extends State<Painting> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(),
       body: Center(
         child: Text("Painting"),
       ),

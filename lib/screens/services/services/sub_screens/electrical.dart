@@ -41,6 +41,7 @@ class _ElectricalState extends State<Electrical> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Column(children: [
         ListView.builder(
           shrinkWrap: true,

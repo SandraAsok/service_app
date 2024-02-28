@@ -31,6 +31,7 @@ class _CleaningState extends State<Cleaning> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: ListView.builder(
         itemCount: cleaningtext.length,
         itemBuilder: (context, index) {

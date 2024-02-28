@@ -1,8 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:service_app/screens/home/home.dart';
+import 'package:service_app/main.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class SignUp extends StatelessWidget {
@@ -28,7 +26,7 @@ class SignUp extends StatelessWidget {
                 height: size.height / 3,
                 child: Image.asset('assets/images/welcome.png')),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Padding(
@@ -41,7 +39,7 @@ class SignUp extends StatelessWidget {
                     decoration: InputDecoration(
                         label: Text('Email', style: black_style),
                         hintText: 'Type Here',
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: const Icon(Icons.person),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(color: theme_color))),
@@ -51,7 +49,7 @@ class SignUp extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                         label: Text('Password', style: black_style),
                         hintText: 'Type Here',
                         border: OutlineInputBorder(
@@ -64,8 +62,8 @@ class SignUp extends StatelessWidget {
                     style: ButtonStyle(
                         side: MaterialStatePropertyAll<BorderSide>(
                             BorderSide(color: theme_color)),
-                        fixedSize:
-                            MaterialStatePropertyAll<Size>(Size.fromHeight(50)),
+                        fixedSize: const MaterialStatePropertyAll<Size>(
+                            Size.fromHeight(50)),
                         textStyle:
                             MaterialStatePropertyAll<TextStyle>(button_style)),
                     child: Text("Create Account", style: hint_style)),
@@ -80,7 +78,7 @@ class SignUp extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 CupertinoPageRoute(
-                                    builder: (context) => SignIn(),
+                                    builder: (context) => const SignIn(),
                                     fullscreenDialog: true));
                           },
                           child: Text("Sign In", style: hint_style))
@@ -88,7 +86,7 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
                 space,
-                Divider(thickness: 2),
+                const Divider(thickness: 2),
                 space,
                 Container(
                   width: 250,
@@ -99,7 +97,7 @@ class SignUp extends StatelessWidget {
                     onTap: () {},
                     child: Row(
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                             radius: 25,
                             backgroundImage:
                                 AssetImage('assets/images/google.jpg')),
@@ -143,7 +141,7 @@ class SignIn extends StatelessWidget {
               child: Image.asset('assets/images/welcome.png'),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Padding(
@@ -154,8 +152,8 @@ class SignIn extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.person),
-                        label: Text('Email'),
+                        prefixIcon: const Icon(Icons.person),
+                        label: const Text('Email'),
                         hintText: 'Type Here',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20))),
@@ -165,8 +163,8 @@ class SignIn extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
-                        label: Text('Password'),
+                        prefixIcon: const Icon(Icons.lock),
+                        label: const Text('Password'),
                         hintText: 'Type Here',
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20))),
@@ -178,17 +176,17 @@ class SignIn extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => Home(),
+                            builder: (context) => const BottomNav(),
                           ));
                     },
                     style: ButtonStyle(
                         side: MaterialStatePropertyAll<BorderSide>(
                             BorderSide(color: theme_color)),
-                        fixedSize:
-                            MaterialStatePropertyAll<Size>(Size.fromHeight(50)),
+                        fixedSize: const MaterialStatePropertyAll<Size>(
+                            Size.fromHeight(50)),
                         textStyle:
                             MaterialStatePropertyAll<TextStyle>(hint_style)),
-                    child: Text("Sign In")),
+                    child: const Text("Sign In")),
                 space,
               ],
             ),
