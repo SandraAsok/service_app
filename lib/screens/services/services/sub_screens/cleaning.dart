@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:service_app/screens/services/labour_list.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class Cleaning extends StatefulWidget {
@@ -38,7 +40,11 @@ class _CleaningState extends State<Cleaning> {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(CupertinoPageRoute(
+                    builder: (context) => const LabourList(),
+                    fullscreenDialog: true));
+              },
               child: ListTile(
                 leading: cleaningIcon[index],
                 title: Text(

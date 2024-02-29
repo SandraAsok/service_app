@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:service_app/screens/services/services/sub_screens/appliances.dart';
+import 'package:service_app/screens/services/services/sub_screens/cleaning.dart';
+import 'package:service_app/screens/services/services/sub_screens/electrical.dart';
+import 'package:service_app/screens/services/services/sub_screens/fabrication.dart';
+import 'package:service_app/screens/services/services/sub_screens/homeshifting.dart';
+import 'package:service_app/screens/services/services/sub_screens/painting.dart';
+import 'package:service_app/screens/services/services/sub_screens/plumping.dart';
 import 'package:service_app/utilities/list.dart';
 import 'package:service_app/utilities/utilities.dart';
 
@@ -11,6 +18,16 @@ class AllServices extends StatefulWidget {
 }
 
 class _AllServicesState extends State<AllServices> {
+  List<Widget> categoryscreens = [
+    const Electrical(),
+    const Painting(),
+    const Plumping(),
+    const Appliances(),
+    const Cleaning(),
+    const HomeShifting(),
+    const Fabrication(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +62,13 @@ class _AllServicesState extends State<AllServices> {
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => categoryscreens[index],
+                            fullscreenDialog: true));
+                  },
                   child: Container(
                     width: 200,
                     height: 120,
@@ -64,20 +87,14 @@ class _AllServicesState extends State<AllServices> {
                       ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
                       child: Padding(
                         padding: const EdgeInsets.only(top: 20, left: 100),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Spacer(),
-                            SizedBox(
-                              height: 150,
-                              width: 150,
-                              child: Text(
-                                servicetext[index],
-                                style: GoogleFonts.oswald(
-                                    fontWeight: FontWeight.w900, fontSize: 28),
-                              ),
-                            ),
-                          ],
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Text(
+                            servicetext[index],
+                            style: GoogleFonts.oswald(
+                                fontWeight: FontWeight.w900, fontSize: 28),
+                          ),
                         ),
                       ),
                     ),

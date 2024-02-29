@@ -35,7 +35,7 @@ List<Widget> categoryscreens = [
   const Appliances(),
   const Cleaning(),
   const HomeShifting(),
-  const Furniture(),
+  const Fabrication(),
 ];
 
 List<Widget> additionalscreens = [

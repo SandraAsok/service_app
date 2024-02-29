@@ -4,13 +4,13 @@ import 'package:service_app/screens/bookings/calender.dart';
 import 'package:service_app/screens/home/home.dart';
 import 'package:service_app/screens/settings/settings.dart';
 import 'package:service_app/screens/support/support.dart';
-import 'package:service_app/screens/welcome.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Welcome(),
+    home: Home(),
+    //home: Welcome(),
   ));
 }
 
