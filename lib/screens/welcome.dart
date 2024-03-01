@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/screens/Login/login.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
@@ -26,9 +25,14 @@ class _WelcomeState extends State<Welcome> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "AtoZ Home Service",
-                style: heading_style,
+              Center(
+                child: Text(
+                  "AtoZ Home Service",
+                  style: heading_style,
+                ),
+              ),
+              SizedBox(
+                height: 60,
               ),
               SizedBox(
                 height: size.height / 2,
@@ -46,17 +50,17 @@ class _WelcomeState extends State<Welcome> {
             borderRadius: BorderRadius.circular(30),
             gradient: LinearGradient(colors: [theme_color, Colors.white]),
           ),
-          height: size.height / 3,
+          height: size.height / 8,
           width: double.infinity,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                    "Bringing Home to Life:\n     Your Trusted Partner for Seamless Services at Your Doorstep!",
-                    style: GoogleFonts.lora(
-                        fontWeight: FontWeight.bold, fontSize: 30)),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(10.0),
+              //   child: Text(
+
+              //       style: GoogleFonts.lora(
+              //           fontWeight: FontWeight.bold, fontSize: 30)),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
@@ -75,7 +79,7 @@ class _WelcomeState extends State<Welcome> {
                     },
                     isFinished: isfinish,
                     onWaitingProcess: () {
-                      Future.delayed(const Duration(seconds: 2), () {
+                      Future.delayed(const Duration(seconds: 1), () {
                         setState(() {
                           isfinish = true;
                         });

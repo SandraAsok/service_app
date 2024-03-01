@@ -84,13 +84,11 @@ class _AllServicesState extends State<AllServices> {
                           gradient: LinearGradient(colors: [
                         Colors.white.withOpacity(0),
                         theme_color
-                      ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+                      ], begin: Alignment.topRight, end: Alignment.bottomLeft)),
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 20, left: 100),
-                        child: SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Text(
+                        padding: const EdgeInsets.all(15.0),
+                        child: ListTile(
+                          title: Text(
                             servicetext[index],
                             style: GoogleFonts.oswald(
                                 fontWeight: FontWeight.w900, fontSize: 28),

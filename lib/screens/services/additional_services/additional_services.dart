@@ -91,10 +91,22 @@ class _AdditionalServicesState extends State<AdditionalServices> {
                                         end: Alignment.bottomRight),
                                     borderRadius: BorderRadius.circular(20)),
                               ),
-                              Text(
-                                addtext1[index],
-                                style: GoogleFonts.oswald(
-                                    fontWeight: FontWeight.w900, fontSize: 25),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.6),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      addtext1[index],
+                                      style: GoogleFonts.oswald(
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 25),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -134,10 +146,23 @@ class _AdditionalServicesState extends State<AdditionalServices> {
                                         end: Alignment.bottomLeft),
                                     borderRadius: BorderRadius.circular(20)),
                               ),
-                              Text(
-                                addtext2[index],
-                                style: GoogleFonts.oswald(
-                                    fontWeight: FontWeight.w900, fontSize: 25),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white.withOpacity(0.6),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      addtext2[index],
+                                      style: GoogleFonts.oswald(
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 25),
+                                    ),
+                                  ),
+                                ),
                               )
                             ],
                           ),
@@ -182,10 +207,15 @@ class _AdditionalServicesState extends State<AdditionalServices> {
                                     end: Alignment.bottomRight),
                                 borderRadius: BorderRadius.circular(20)),
                           ),
-                          Text(
-                            "GENERAL",
-                            style: GoogleFonts.oswald(
-                                fontWeight: FontWeight.w900, fontSize: 25),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.6),
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Text(
+                              "GENERAL",
+                              style: GoogleFonts.oswald(
+                                  fontWeight: FontWeight.w900, fontSize: 25),
+                            ),
                           )
                         ],
                       ),

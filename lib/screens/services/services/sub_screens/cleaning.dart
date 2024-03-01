@@ -30,6 +30,7 @@ class _CleaningState extends State<Cleaning> {
     Icon(Icons.bathroom_outlined, color: theme_color),
     Icon(Icons.pest_control, color: theme_color),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -87,16 +87,20 @@ class _BakeryDetailState extends State<BakeryDetail> {
                                     end: Alignment.bottomRight),
                                 borderRadius: BorderRadius.circular(20)),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: Colors.white.withOpacity(0.4)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: Text(
-                                bakerytext[index],
-                                style: GoogleFonts.oswald(
-                                    fontWeight: FontWeight.w900, fontSize: 25),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.white.withOpacity(0.6)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Text(
+                                  bakerytext[index],
+                                  style: GoogleFonts.oswald(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 25),
+                                ),
                               ),
                             ),
                           ),

@@ -18,6 +18,7 @@ class _ElectricalState extends State<Electrical> {
     "Short Circuit",
     "Distribution Board/MSB",
   ];
+
   List electricalIcon = [
     Icon(
       Icons.electrical_services,
