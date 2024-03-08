@@ -22,7 +22,7 @@ void main() {
   runApp(MaterialApp(
     navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,
-    home: const Splash(),
+    home: const Welcome(),
   ));
 }
 
