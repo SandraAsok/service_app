@@ -31,7 +31,7 @@ class _WelcomeState extends State<Welcome> {
                   style: heading_style,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 60,
               ),
               SizedBox(
@@ -54,13 +54,6 @@ class _WelcomeState extends State<Welcome> {
           width: double.infinity,
           child: Column(
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.all(10.0),
-              //   child: Text(
-
-              //       style: GoogleFonts.lora(
-              //           fontWeight: FontWeight.bold, fontSize: 30)),
-              // ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(

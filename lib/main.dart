@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:service_app/screens/bookings/calender.dart';
@@ -8,9 +10,19 @@ import 'package:service_app/screens/welcome.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyBu2WySvi4X5PYZF3i0yKmad6v9QCYjlTU",
+      appId: "1:632744309940:android:063901222a9068f27393e1",
+      messagingSenderId: "632744309940",
+      projectId: "atozservice-b6c16",
+    ),
+  );
+  runApp(MaterialApp(
+    navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,
-    home: Welcome(),
+    home: const Splash(),
   ));
 }
 
@@ -21,7 +33,29 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: const Text("Something went wrong"),
+              action: SnackBarAction(
+                label: 'Dismiss',
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ));
+          } else if (snapshot.hasData) {
+            return const Home();
+          }
+          return const Welcome();
+        },
+      ),
+    );
   }
 }
 

@@ -39,6 +39,7 @@ dependencies:
   firebase_storage:
   cloud_firestore:
   firebase_auth:
+  google_sign_in:
 
 dev_dependencies:
   flutter_lints: ^2.0.0

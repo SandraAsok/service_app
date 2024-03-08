@@ -1,13 +1,45 @@
+// ignore_for_file: unnecessary_null_comparison, use_build_context_synchronously
+
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:service_app/functions/function.dart';
 import 'package:service_app/main.dart';
 import 'package:service_app/utilities/utilities.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
   @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+TextEditingController _email = TextEditingController();
+TextEditingController _password = TextEditingController();
+
+class _SignUpState extends State<SignUp> {
+  @override
   Widget build(BuildContext context) {
+    signup() async {
+      try {
+        final user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _email.text,
+          password: _password.text,
+        );
+        if (user != null) {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                  builder: (context) => const BottomNav(),
+                  fullscreenDialog: true));
+        }
+      } catch (e) {
+        log("ERROR: $e");
+      }
+    }
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -36,6 +68,8 @@ class SignUp extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: _email,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         label: Text('Email', style: black_style),
                         hintText: 'Type Here',
@@ -48,6 +82,7 @@ class SignUp extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: _password,
                     obscureText: true,
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.lock),
@@ -59,7 +94,9 @@ class SignUp extends StatelessWidget {
                 ),
                 space,
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      signup();
+                    },
                     style: ButtonStyle(
                         side: MaterialStatePropertyAll<BorderSide>(
                             BorderSide(color: theme_color)),
@@ -95,7 +132,9 @@ class SignUp extends StatelessWidget {
                       border: Border.all(color: theme_color),
                       borderRadius: BorderRadius.circular(30)),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      googleSignIn();
+                    },
                     child: Row(
                       children: [
                         const CircleAvatar(
@@ -119,11 +158,37 @@ class SignUp extends StatelessWidget {
   }
 }
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
   @override
+  State<SignIn> createState() => _SignInState();
+}
+
+TextEditingController email = TextEditingController();
+TextEditingController password = TextEditingController();
+
+class _SignInState extends State<SignIn> {
+  @override
   Widget build(BuildContext context) {
+    signin() async {
+      try {
+        final user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email.text,
+          password: password.text,
+        );
+        if (user != null) {
+          Navigator.push(
+              context,
+              CupertinoPageRoute(
+                builder: (context) => const BottomNav(),
+              ));
+        }
+      } catch (e) {
+        log("ERROR : $e");
+      }
+    }
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
@@ -152,6 +217,8 @@ class SignIn extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: email,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.person),
                         label: const Text('Email'),
@@ -163,6 +230,7 @@ class SignIn extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(
+                    controller: password,
                     obscureText: true,
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.lock),
@@ -175,11 +243,7 @@ class SignIn extends StatelessWidget {
                 space,
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const BottomNav(),
-                          ));
+                      signin();
                     },
                     style: ButtonStyle(
                         side: MaterialStatePropertyAll<BorderSide>(
