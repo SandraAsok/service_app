@@ -13,7 +13,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp(
     options: const FirebaseOptions(
-      apiKey: "AIzaSyBu2WySvi4X5PYZF3i0yKmad6v9QCYjlTU",
+      apiKey: "AIzaSyCKRz2BwiB_VWW68Fmtb-e3A_vZhEeXteM",
       appId: "1:632744309940:android:063901222a9068f27393e1",
       messagingSenderId: "632744309940",
       projectId: "atozservice-b6c16",
@@ -22,7 +22,7 @@ void main() {
   runApp(MaterialApp(
     navigatorKey: navigatorKey,
     debugShowCheckedModeBanner: false,
-    home: const Welcome(),
+    home: const Splash(),
   ));
 }
 
@@ -34,7 +34,7 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+      body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -50,7 +50,7 @@ class Splash extends StatelessWidget {
               ),
             ));
           } else if (snapshot.hasData) {
-            return const Home();
+            return const BottomNav();
           }
           return const Welcome();
         },

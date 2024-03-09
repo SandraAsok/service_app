@@ -16,10 +16,9 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 
-TextEditingController _email = TextEditingController();
-TextEditingController _password = TextEditingController();
-
 class _SignUpState extends State<SignUp> {
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     signup() async {
@@ -95,7 +94,9 @@ class _SignUpState extends State<SignUp> {
                 space,
                 ElevatedButton(
                     onPressed: () {
-                      signup();
+                      setState(() {
+                        signup();
+                      });
                     },
                     style: ButtonStyle(
                         side: MaterialStatePropertyAll<BorderSide>(
