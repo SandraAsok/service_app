@@ -33,6 +33,7 @@ class _SignUpState extends State<SignUp> {
               CupertinoPageRoute(
                   builder: (context) => const BottomNav(),
                   fullscreenDialog: true));
+          navigatorKey.currentState!.popUntil((route) => route.isFirst);
         }
       } catch (e) {
         log("ERROR: $e");
@@ -184,6 +185,7 @@ class _SignInState extends State<SignIn> {
               CupertinoPageRoute(
                 builder: (context) => const BottomNav(),
               ));
+          navigatorKey.currentState!.popUntil((route) => route.isFirst);
         }
       } catch (e) {
         log("ERROR : $e");
