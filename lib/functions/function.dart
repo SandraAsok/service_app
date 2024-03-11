@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:service_app/main.dart';
 
 Future googleSignIn() async {
   final googleSignIn = GoogleSignIn();
@@ -13,5 +12,5 @@ Future googleSignIn() async {
   final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
   await FirebaseAuth.instance.signInWithCredential(credential);
-  navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  // navigatorKey.currentState!.popUntil((route) => route.isFirst);
 }
