@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:service_app/functions/function.dart';
 import 'package:service_app/main.dart';
 import 'package:service_app/utilities/utilities.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -33,7 +34,6 @@ class _SignUpState extends State<SignUp> {
               CupertinoPageRoute(
                   builder: (context) => const BottomNav(),
                   fullscreenDialog: true));
-          //  navigatorKey.currentState!.popUntil((route) => route.isFirst);
         }
       } catch (e) {
         log("ERROR: $e");
@@ -94,10 +94,16 @@ class _SignUpState extends State<SignUp> {
                 ),
                 space,
                 ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        signup();
-                      });
+                    onPressed: () async {
+                      final SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
+                      sharedPreferences.setString('email', _email.text);
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => BottomNav(),
+                      //     ));
+                      signup();
                     },
                     style: ButtonStyle(
                         side: MaterialStatePropertyAll<BorderSide>(
@@ -185,7 +191,6 @@ class _SignInState extends State<SignIn> {
               CupertinoPageRoute(
                 builder: (context) => const BottomNav(),
               ));
-          //navigatorKey.currentState!.popUntil((route) => route.isFirst);
         }
       } catch (e) {
         log("ERROR : $e");
@@ -245,7 +250,10 @@ class _SignInState extends State<SignIn> {
                 ),
                 space,
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
+                      sharedPreferences.setString('email', email.text);
                       signin();
                     },
                     style: ButtonStyle(

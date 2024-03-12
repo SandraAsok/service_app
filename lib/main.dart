@@ -18,45 +18,11 @@ void main() {
       projectId: "atozservice-b6c16",
     ),
   );
-  runApp(MaterialApp(
-    // navigatorKey: navigatorKey,
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: const Welcome(),
+    home: Welcome(),
   ));
 }
-
-// final navigatorKey = GlobalKey<NavigatorState>();
-
-// class Splash extends StatelessWidget {
-//   const Splash({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: StreamBuilder<User?>(
-//         stream: FirebaseAuth.instance.authStateChanges(),
-//         builder: (context, snapshot) {
-//           if (snapshot.connectionState == ConnectionState.waiting) {
-//             return const CircularProgressIndicator();
-//           } else if (snapshot.hasError) {
-//             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//               content: const Text("Something went wrong"),
-//               action: SnackBarAction(
-//                 label: 'Dismiss',
-//                 onPressed: () {
-//                   Navigator.pop(context);
-//                 },
-//               ),
-//             ));
-//           } else if (snapshot.hasData) {
-//             return const BottomNav();
-//           }
-//           return const Welcome();
-//         },
-//       ),
-//     );
-//   }
-// }
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
