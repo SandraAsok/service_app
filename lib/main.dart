@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -7,6 +9,7 @@ import 'package:service_app/screens/settings/settings.dart';
 import 'package:service_app/screens/support/support.dart';
 import 'package:service_app/screens/welcome.dart';
 import 'package:service_app/utilities/utilities.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +23,54 @@ void main() {
   );
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Welcome(),
+    home: Splash(),
   ));
+}
+
+class Splash extends StatefulWidget {
+  const Splash({super.key});
+
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+    getValidationData().whenComplete(
+      () async {
+        if (finalemail == null) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Welcome(),
+              ));
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const BottomNav(),
+              ));
+        }
+      },
+    );
+    super.initState();
+  }
+
+  Future getValidationData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedEmail = sharedPreferences.getString('email');
+    setState(() {
+      finalemail = obtainedEmail!;
+    });
+    log(finalemail!);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
 }
 
 class BottomNav extends StatefulWidget {

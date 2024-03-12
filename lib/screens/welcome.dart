@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:service_app/main.dart';
 import 'package:service_app/screens/Login/login.dart';
 import 'package:service_app/utilities/utilities.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 String? finalemail;
@@ -20,38 +16,6 @@ class Welcome extends StatefulWidget {
 bool isfinish = false;
 
 class _WelcomeState extends State<Welcome> {
-  @override
-  void initState() {
-    getValidationData().whenComplete(
-      () async {
-        if (finalemail == null) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Welcome(),
-              ));
-        } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const BottomNav(),
-              ));
-        }
-      },
-    );
-    super.initState();
-  }
-
-  Future getValidationData() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    var obtainedEmail = sharedPreferences.getString('email');
-    setState(() {
-      finalemail = obtainedEmail!;
-    });
-    log(finalemail!);
-  }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
