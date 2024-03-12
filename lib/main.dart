@@ -27,6 +27,8 @@ void main() {
   ));
 }
 
+String? finalemail;
+
 class Splash extends StatefulWidget {
   const Splash({super.key});
 

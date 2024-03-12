@@ -4,8 +4,6 @@ import 'package:service_app/screens/Login/login.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 
-String? finalemail;
-
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
 
