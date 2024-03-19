@@ -41,6 +41,7 @@ class _ElectricalState extends State<Electrical> {
       color: theme_color,
     )
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +56,9 @@ class _ElectricalState extends State<Electrical> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(CupertinoPageRoute(
-                      builder: (context) => const LabourList(),
+                      builder: (context) => LabourList(
+                            job: 'Electrical',
+                          ),
                       fullscreenDialog: true));
                 },
                 child: ListTile(

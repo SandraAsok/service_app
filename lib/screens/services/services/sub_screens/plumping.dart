@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:service_app/screens/services/labour_list.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class Plumping extends StatefulWidget {
@@ -31,7 +33,13 @@ class _PlumpingState extends State<Plumping> {
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(CupertinoPageRoute(
+                    builder: (context) => const LabourList(
+                          job: 'Plumping',
+                        ),
+                    fullscreenDialog: true));
+              },
               child: ListTile(
                 leading: plumpingIcon[index],
                 title: Text(
