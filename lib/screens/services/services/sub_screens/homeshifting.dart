@@ -48,10 +48,10 @@ class _HomeShiftingState extends State<HomeShifting> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsets.all(20.0),
+                                        padding: const EdgeInsets.all(20.0),
                                         child: Text(
                                           document['name'],
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
