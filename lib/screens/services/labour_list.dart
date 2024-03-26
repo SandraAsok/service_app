@@ -47,8 +47,13 @@ class _LabourListState extends State<LabourList> {
                                   Navigator.push(
                                       context,
                                       CupertinoPageRoute(
-                                          builder: (context) =>
-                                              const LabourDetail(),
+                                          builder: (context) => LabourDetail(
+                                                name: document['name'],
+                                                image: document['image'][0],
+                                                age: document['age'],
+                                                details: document['details'],
+                                                address: document['address'],
+                                              ),
                                           fullscreenDialog: true));
                                 },
                                 child: Container(
