@@ -5,14 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class Calendar extends StatefulWidget {
-  const Calendar({super.key});
+class CalendarBooking extends StatefulWidget {
+  const CalendarBooking({super.key});
 
   @override
-  State<Calendar> createState() => _CalendarState();
+  State<CalendarBooking> createState() => _CalendarBookingState();
 }
 
-class _CalendarState extends State<Calendar> {
+class _CalendarBookingState extends State<CalendarBooking> {
   DateTime today = DateTime.now();
   void onDayselected(selectedDay, focusedDay) {
     setState(() {
@@ -28,7 +28,7 @@ class _CalendarState extends State<Calendar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Your Booked Services',
+                'Book Your Service',
                 style: GoogleFonts.oswald(
                     fontWeight: FontWeight.bold, color: theme_color),
               ),

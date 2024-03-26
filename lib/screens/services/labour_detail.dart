@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:service_app/screens/bookings/calender.dart';
+import 'package:service_app/screens/bookings/calendarbooking.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class LabourDetail extends StatefulWidget {
@@ -71,7 +71,7 @@ class _LabourDetailState extends State<LabourDetail> {
                   Navigator.push(
                       context,
                       CupertinoPageRoute(
-                        builder: (context) => const Calendar(),
+                        builder: (context) => const CalendarBooking(),
                       ));
                 },
                 icon: const Icon(Icons.calendar_month_outlined))
