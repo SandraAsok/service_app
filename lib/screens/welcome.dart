@@ -17,79 +17,81 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text(
-                  "AtoZ Home Service",
-                  style: heading_style,
-                ),
-              ),
-              const SizedBox(
-                height: 60,
-              ),
-              SizedBox(
-                height: size.height / 2,
-                width: double.infinity,
-                child:
-                    const Image(image: AssetImage("assets/images/welcome.png")),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomSheet: SingleChildScrollView(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            gradient: LinearGradient(colors: [theme_color, Colors.white]),
-          ),
-          height: size.height / 8,
-          width: double.infinity,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SizedBox(
-                  width: 300,
-                  height: size.height / 20,
-                  child: SwipeableButtonView(
-                    onFinish: () async {
-                      await Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                              builder: (context) => const SignUp(),
-                              fullscreenDialog: false));
-                      setState(() {
-                        isfinish = false;
-                      });
-                    },
-                    isFinished: isfinish,
-                    onWaitingProcess: () {
-                      Future.delayed(const Duration(seconds: 1), () {
-                        setState(() {
-                          isfinish = true;
-                        });
-                      });
-                    },
-                    activeColor: Colors.white,
-                    buttonWidget: const Icon(
-                      Icons.arrow_forward_ios_outlined,
-                      color: Colors.black,
-                    ),
-                    buttonText: "GET STARTED",
-                    buttontextstyle: const TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text(
+                    "AtoZ Home Service",
+                    style: heading_style,
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 60,
+                ),
+                SizedBox(
+                  height: size.height / 2,
+                  width: double.infinity,
+                  child: const Image(
+                      image: AssetImage("assets/images/welcome.png")),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomSheet: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              gradient: LinearGradient(colors: [theme_color, Colors.white]),
+            ),
+            height: size.height / 8,
+            width: double.infinity,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: SizedBox(
+                    width: 300,
+                    height: size.height / 20,
+                    child: SwipeableButtonView(
+                      onFinish: () async {
+                        await Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                                builder: (context) => const SignUp(),
+                                fullscreenDialog: false));
+                        setState(() {
+                          isfinish = false;
+                        });
+                      },
+                      isFinished: isfinish,
+                      onWaitingProcess: () {
+                        Future.delayed(const Duration(seconds: 1), () {
+                          setState(() {
+                            isfinish = true;
+                          });
+                        });
+                      },
+                      activeColor: Colors.white,
+                      buttonWidget: const Icon(
+                        Icons.arrow_forward_ios_outlined,
+                        color: Colors.black,
+                      ),
+                      buttonText: "GET STARTED",
+                      buttontextstyle: const TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

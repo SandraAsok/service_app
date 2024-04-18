@@ -18,6 +18,8 @@ class LabourList extends StatefulWidget {
   State<LabourList> createState() => _LabourListState();
 }
 
+String _phone = '';
+
 class _LabourListState extends State<LabourList> {
   @override
   Widget build(BuildContext context) {
@@ -82,9 +84,15 @@ class _LabourListState extends State<LabourList> {
                                     ),
                                   ),
                                   IconButton(
-                                    onPressed: () {
-                                      _launchPhoneCall(document[
-                                          'phone']); // Call function to launch phone call
+                                    onPressed: () async {
+                                      setState(() {
+                                        _phone = document['phone'];
+                                      });
+                                      final url =
+                                          Uri(scheme: 'tel', path: _phone);
+                                      if (await canLaunchUrl(url)) {
+                                        launchUrl(url);
+                                      }
                                     },
                                     icon: Icon(Icons.phone),
                                   ),
@@ -118,14 +126,5 @@ class _LabourListState extends State<LabourList> {
         ),
       ),
     );
-  }
-
-  void _launchPhoneCall(String phoneNumber) async {
-    String telScheme = 'tel:$phoneNumber';
-    if (await canLaunchUrl(telScheme as Uri)) {
-      await launchUrl(telScheme as Uri);
-    } else {
-      throw 'Could not launch $telScheme';
-    }
   }
 }

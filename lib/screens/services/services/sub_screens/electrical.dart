@@ -44,35 +44,37 @@ class _ElectricalState extends State<Electrical> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(children: [
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: electricaltext.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(CupertinoPageRoute(
-                      builder: (context) => LabourList(
-                            job: 'Electrical',
-                          ),
-                      fullscreenDialog: true));
-                },
-                child: ListTile(
-                  leading: electricalIcon[index],
-                  title: Text(
-                    electricaltext[index],
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Column(children: [
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: electricaltext.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(CupertinoPageRoute(
+                        builder: (context) => LabourList(
+                              job: 'Electrical',
+                            ),
+                        fullscreenDialog: true));
+                  },
+                  child: ListTile(
+                    leading: electricalIcon[index],
+                    title: Text(
+                      electricaltext[index],
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        )
-      ]),
+              );
+            },
+          )
+        ]),
+      ),
     );
   }
 }
