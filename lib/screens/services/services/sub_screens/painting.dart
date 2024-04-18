@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:service_app/utilities/utilities.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Painting extends StatefulWidget {
   const Painting({super.key});
@@ -10,6 +11,8 @@ class Painting extends StatefulWidget {
   @override
   State<Painting> createState() => _PaintingState();
 }
+
+String _phone = '';
 
 class _PaintingState extends State<Painting> {
   @override
@@ -56,7 +59,16 @@ class _PaintingState extends State<Painting> {
                                         ),
                                       ),
                                       IconButton(
-                                          onPressed: () {},
+                                          onPressed: () async {
+                                            setState(() {
+                                              _phone = document['phone'];
+                                            });
+                                            final url = Uri(
+                                                scheme: 'tel', path: _phone);
+                                            if (await canLaunchUrl(url)) {
+                                              launchUrl(url);
+                                            }
+                                          },
                                           icon: const Icon(Icons.phone)),
                                       ElevatedButton.icon(
                                           onPressed: () {},

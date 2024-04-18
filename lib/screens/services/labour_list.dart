@@ -23,106 +23,109 @@ String _phone = '';
 class _LabourListState extends State<LabourList> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            space,
-            SizedBox(
-              height: 900,
-              child: StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('labours')
-                    .where('job', isEqualTo: widget.job)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final document = snapshot.data!.docs[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                  builder: (context) => LabourDetail(
-                                    name: document['name'],
-                                    image: document['image'][0],
-                                    age: document['age'],
-                                    details: document['details'],
-                                    address: document['address'],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              space,
+              SizedBox(
+                height: 900,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('labours')
+                      .where('job', isEqualTo: widget.job)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final document = snapshot.data!.docs[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => LabourDetail(
+                                      name: document['name'],
+                                      image: document['image'][0],
+                                      age: document['age'],
+                                      details: document['details'],
+                                      address: document['address'],
+                                      phone: document['phone'],
+                                    ),
+                                    fullscreenDialog: true,
                                   ),
-                                  fullscreenDialog: true,
+                                );
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  gradient: LinearGradient(
+                                    colors: [theme_color, Colors.white],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
                                 ),
-                              );
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: LinearGradient(
-                                  colors: [theme_color, Colors.white],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(20.0),
-                                    child: Text(
-                                      document['name'],
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: Text(
+                                        document['name'],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () async {
-                                      setState(() {
-                                        _phone = document['phone'];
-                                      });
-                                      final url =
-                                          Uri(scheme: 'tel', path: _phone);
-                                      if (await canLaunchUrl(url)) {
-                                        launchUrl(url);
-                                      }
-                                    },
-                                    icon: Icon(Icons.phone),
-                                  ),
-                                  ElevatedButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.calendar_month_outlined),
-                                    label: Text("Book"),
-                                  ),
-                                  CircleAvatar(
-                                    backgroundColor: Colors.purple,
-                                    radius: 35,
-                                    backgroundImage: NetworkImage(
-                                      document['image'][0],
+                                    IconButton(
+                                      onPressed: () async {
+                                        setState(() {
+                                          _phone = document['phone'];
+                                        });
+                                        final url =
+                                            Uri(scheme: 'tel', path: _phone);
+                                        if (await canLaunchUrl(url)) {
+                                          launchUrl(url);
+                                        }
+                                      },
+                                      icon: Icon(Icons.phone),
                                     ),
-                                  ),
-                                ],
+                                    ElevatedButton.icon(
+                                      onPressed: () {},
+                                      icon: Icon(Icons.calendar_month_outlined),
+                                      label: Text("Book"),
+                                    ),
+                                    CircleAvatar(
+                                      backgroundColor: Colors.purple,
+                                      radius: 35,
+                                      backgroundImage: NetworkImage(
+                                        document['image'][0],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  } else if (snapshot.hasError) {
-                    log("ERROR While Loading labours ::: ${snapshot.error}");
-                  }
-                  return CircularProgressIndicator();
-                },
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      log("ERROR While Loading labours ::: ${snapshot.error}");
+                    }
+                    return CircularProgressIndicator();
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
