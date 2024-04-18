@@ -6,7 +6,22 @@ import 'package:service_app/utilities/utilities.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarBooking extends StatefulWidget {
-  const CalendarBooking({super.key});
+  final String labourName;
+  final String labourAddress;
+  final String labourAge;
+  final String labourDetails;
+  final String image;
+  final String job;
+  final String phone;
+  const CalendarBooking(
+      {super.key,
+      required this.labourName,
+      required this.labourAddress,
+      required this.labourAge,
+      required this.labourDetails,
+      required this.image,
+      required this.job,
+      required this.phone});
 
   @override
   State<CalendarBooking> createState() => _CalendarBookingState();
@@ -17,6 +32,20 @@ class _CalendarBookingState extends State<CalendarBooking> {
   void onDayselected(selectedDay, focusedDay) {
     setState(() {
       today = selectedDay;
+    });
+  }
+
+  int counter = 0;
+
+  incrementCounter() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  decrementCounter() {
+    setState(() {
+      counter--;
     });
   }
 
@@ -45,21 +74,21 @@ class _CalendarBookingState extends State<CalendarBooking> {
             children: [
               space,
               Padding(
-                padding: const EdgeInsets.all(15),
+                padding: const EdgeInsets.all(8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Select Date',
+                      'Selected Date',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Icon(Icons.calendar_month_outlined)
+                    Icon(Icons.calendar_month_outlined),
+                    Text(
+                      '  :  ${today.toString().split(" ")[0]}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ],
                 ),
-              ),
-              Text(
-                'Selected Day =${today.toString().split(" ")[0]}',
-                style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Center(
                 child: Padding(
@@ -119,19 +148,24 @@ class _CalendarBookingState extends State<CalendarBooking> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CircleAvatar(
-                                  child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.add),
-                              )),
+                                child: IconButton(
+                                    onPressed: () {
+                                      decrementCounter();
+                                    },
+                                    icon: Icon(Icons.remove)),
+                              ),
                               Text(
-                                '0',
+                                '$counter',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               CircleAvatar(
-                                child: IconButton(
-                                    onPressed: () {}, icon: Icon(Icons.remove)),
-                              )
+                                  child: IconButton(
+                                onPressed: () {
+                                  incrementCounter();
+                                },
+                                icon: Icon(Icons.add),
+                              )),
                             ],
                           ),
                         ),
@@ -141,6 +175,75 @@ class _CalendarBookingState extends State<CalendarBooking> {
                 ),
               ),
               Divider(),
+              Card(
+                child: Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          colors: [theme_color, Colors.white],
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        labelText: 'Leave the service notes',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(),
+              Text(
+                'For further verification',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Card(
+                child: Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          colors: [theme_color, Colors.white],
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Your name',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(),
+              Card(
+                child: Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          colors: [theme_color, Colors.white],
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Your Phone',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(),
+              ElevatedButton(onPressed: () {}, child: Text("Book"))
             ],
           ),
         ));

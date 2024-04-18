@@ -12,6 +12,7 @@ class LabourDetail extends StatefulWidget {
   final String details;
   final String address;
   final String phone;
+  final String job;
   const LabourDetail(
       {super.key,
       required this.name,
@@ -19,7 +20,8 @@ class LabourDetail extends StatefulWidget {
       required this.age,
       required this.details,
       required this.address,
-      required this.phone});
+      required this.phone,
+      required this.job});
 
   @override
   State<LabourDetail> createState() => _LabourDetailState();
@@ -89,7 +91,15 @@ class _LabourDetailState extends State<LabourDetail> {
                         Navigator.push(
                             context,
                             CupertinoPageRoute(
-                              builder: (context) => const CalendarBooking(),
+                              builder: (context) => CalendarBooking(
+                                labourName: widget.name,
+                                labourAddress: widget.address,
+                                labourAge: widget.age,
+                                labourDetails: widget.details,
+                                image: widget.image,
+                                job: widget.job,
+                                phone: widget.phone,
+                              ),
                             ));
                       },
                       icon: const Icon(Icons.calendar_month_outlined))

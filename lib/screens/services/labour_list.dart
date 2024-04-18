@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:service_app/screens/bookings/calendarbooking.dart';
 import 'package:service_app/screens/services/labour_detail.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -58,6 +59,7 @@ class _LabourListState extends State<LabourList> {
                                       details: document['details'],
                                       address: document['address'],
                                       phone: document['phone'],
+                                      job: document['job'],
                                     ),
                                     fullscreenDialog: true,
                                   ),
@@ -99,7 +101,24 @@ class _LabourListState extends State<LabourList> {
                                       icon: Icon(Icons.phone),
                                     ),
                                     ElevatedButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            CupertinoPageRoute(
+                                              builder: (context) =>
+                                                  CalendarBooking(
+                                                labourName: document['name'],
+                                                labourAddress:
+                                                    document['address'],
+                                                labourAge: document['age'],
+                                                labourDetails:
+                                                    document['details'],
+                                                image: document['image'][0],
+                                                job: document['job'],
+                                                phone: document['phone'],
+                                              ),
+                                            ));
+                                      },
                                       icon: Icon(Icons.calendar_month_outlined),
                                       label: Text("Book"),
                                     ),
