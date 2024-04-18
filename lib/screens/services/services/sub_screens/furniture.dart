@@ -4,14 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:service_app/utilities/utilities.dart';
 
-class Fabrication extends StatefulWidget {
-  const Fabrication({super.key});
+class Furniture extends StatefulWidget {
+  const Furniture({super.key});
 
   @override
-  State<Fabrication> createState() => _FabricationState();
+  State<Furniture> createState() => _FurnitureState();
 }
 
-class _FabricationState extends State<Fabrication> {
+class _FurnitureState extends State<Furniture> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,7 @@ class _FabricationState extends State<Fabrication> {
                 child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection('labours')
-                        .where('job', isEqualTo: 'Fabrication')
+                        .where('job', isEqualTo: 'Furniture')
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {

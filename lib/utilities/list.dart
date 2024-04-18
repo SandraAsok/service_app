@@ -9,7 +9,7 @@ List<String> titles = [
   "Home\nAppliances",
   "Cleaning",
   "Home\nShifting",
-  "Fabrication",
+  "Furniture",
 ];
 List<String> category = [
   "assets/images/electrical.jpeg",

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/screens/services/services/sub_screens/appliances.dart';
 import 'package:service_app/screens/services/services/sub_screens/cleaning.dart';
 import 'package:service_app/screens/services/services/sub_screens/electrical.dart';
-import 'package:service_app/screens/services/services/sub_screens/fabrication.dart';
+import 'package:service_app/screens/services/services/sub_screens/furniture.dart';
 import 'package:service_app/screens/services/services/sub_screens/homeshifting.dart';
 import 'package:service_app/screens/services/services/sub_screens/painting.dart';
 import 'package:service_app/screens/services/services/sub_screens/plumping.dart';
@@ -25,7 +25,7 @@ class _AllServicesState extends State<AllServices> {
     const Appliances(),
     const Cleaning(),
     const HomeShifting(),
-    const Fabrication(),
+    const Furniture(),
   ];
 
   @override
