@@ -59,6 +59,7 @@ class _ElectricalState extends State<Electrical> {
                     Navigator.of(context).push(CupertinoPageRoute(
                         builder: (context) => LabourList(
                               job: 'Electrical',
+                              category: electricaltext[index],
                             ),
                         fullscreenDialog: true));
                   },

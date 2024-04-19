@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ class CalendarBooking extends StatefulWidget {
   final String image;
   final String job;
   final String phone;
+  final String category;
   const CalendarBooking(
       {super.key,
       required this.labourName,
@@ -22,7 +23,8 @@ class CalendarBooking extends StatefulWidget {
       required this.labourDetails,
       required this.image,
       required this.job,
-      required this.phone});
+      required this.phone,
+      required this.category});
 
   @override
   State<CalendarBooking> createState() => _CalendarBookingState();
@@ -56,19 +58,47 @@ class _CalendarBookingState extends State<CalendarBooking> {
   TextEditingController address = TextEditingController();
 
   addBooking() async {
-    await FirebaseFirestore.instance.collection('bookings').add({
-      'labour_name': widget.labourName,
-      'age': widget.labourAge,
-      'labour_address': widget.labourAddress,
-      'details': widget.labourDetails,
-      'image': widget.image,
-      'job': widget.job,
-      'labour_phone': widget.phone,
-      'name': name.text,
-      'notes': notes.text,
-      'number': number.text,
-      'address': address.text,
-    });
+    try {
+      await FirebaseFirestore.instance.collection('bookings').add({
+        'category': widget.category,
+        'labour_name': widget.labourName,
+        'age': widget.labourAge,
+        'labour_address': widget.labourAddress,
+        'details': widget.labourDetails,
+        'image': widget.image,
+        'job': widget.job,
+        'labour_phone': widget.phone,
+        'name': name.text,
+        'notes': notes.text,
+        'number': number.text,
+        'address': address.text,
+        'booked_date': today,
+        'hours': counter,
+      });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          'Booked your service successfully',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.purple,
+        action: SnackBarAction(
+          label: 'Dismiss',
+          onPressed: () {},
+        ),
+      ));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          'Something went wrong',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.purple,
+        action: SnackBarAction(
+          label: 'Dismiss',
+          onPressed: () {},
+        ),
+      ));
+    }
   }
 
   @override
@@ -210,6 +240,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: TextField(
+                      controller: notes,
                       maxLines: 5,
                       decoration: InputDecoration(
                         labelText: 'Leave the service notes',
@@ -236,6 +267,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: TextField(
+                      controller: name,
                       decoration: InputDecoration(
                         labelText: 'Your name',
                       ),
@@ -257,6 +289,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: TextField(
+                      controller: number,
                       decoration: InputDecoration(
                         labelText: 'Your Phone',
                       ),
@@ -278,6 +311,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: TextField(
+                      controller: address,
                       maxLines: 5,
                       decoration: InputDecoration(
                         labelText: 'Your Address',
@@ -288,7 +322,13 @@ class _CalendarBookingState extends State<CalendarBooking> {
               ),
               Divider(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  addBooking();
+                  name.clear();
+                  number.clear();
+                  notes.clear();
+                  address.clear();
+                },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.purple)),
                 child: Text(

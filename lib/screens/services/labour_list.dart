@@ -10,9 +10,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 class LabourList extends StatefulWidget {
   final String job;
+  final String category;
   const LabourList({
     super.key,
     required this.job,
+    required this.category,
   });
 
   @override
@@ -60,6 +62,7 @@ class _LabourListState extends State<LabourList> {
                                       address: document['address'],
                                       phone: document['phone'],
                                       job: document['job'],
+                                      category: widget.category,
                                     ),
                                     fullscreenDialog: true,
                                   ),
@@ -107,6 +110,7 @@ class _LabourListState extends State<LabourList> {
                                             CupertinoPageRoute(
                                               builder: (context) =>
                                                   CalendarBooking(
+                                                category: widget.category,
                                                 labourName: document['name'],
                                                 labourAddress:
                                                     document['address'],

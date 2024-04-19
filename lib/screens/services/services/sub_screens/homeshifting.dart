@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:service_app/screens/bookings/calendarbooking.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -71,7 +73,32 @@ class _HomeShiftingState extends State<HomeShifting> {
                                           },
                                           icon: const Icon(Icons.phone)),
                                       ElevatedButton.icon(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                CupertinoPageRoute(
+                                                  builder: (context) =>
+                                                      CalendarBooking(
+                                                          labourName:
+                                                              document['name'],
+                                                          labourAddress:
+                                                              document[
+                                                                  'address'],
+                                                          labourAge:
+                                                              document['age'],
+                                                          labourDetails:
+                                                              document[
+                                                                  'details'],
+                                                          image:
+                                                              document['image']
+                                                                  [0],
+                                                          job: document['job'],
+                                                          phone:
+                                                              document['phone'],
+                                                          category:
+                                                              document['job']),
+                                                ));
+                                          },
                                           icon: const Icon(
                                               Icons.calendar_month_outlined),
                                           label: const Text("Book")),

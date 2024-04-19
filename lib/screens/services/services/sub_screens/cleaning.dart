@@ -43,8 +43,9 @@ class _CleaningState extends State<Cleaning> {
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(CupertinoPageRoute(
-                    builder: (context) => const LabourList(
+                    builder: (context) => LabourList(
                           job: 'Cleaning',
+                          category: cleaningtext[index],
                         ),
                     fullscreenDialog: true));
               },

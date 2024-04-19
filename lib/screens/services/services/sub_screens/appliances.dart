@@ -40,8 +40,9 @@ class _AppliancesState extends State<Appliances> {
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(CupertinoPageRoute(
-                    builder: (context) => const LabourList(
+                    builder: (context) => LabourList(
                           job: 'Home Appliances',
+                          category: appliancestext[index],
                         ),
                     fullscreenDialog: true));
               },

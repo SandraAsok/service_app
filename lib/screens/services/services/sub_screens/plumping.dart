@@ -35,8 +35,9 @@ class _PlumpingState extends State<Plumping> {
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).push(CupertinoPageRoute(
-                    builder: (context) => const LabourList(
+                    builder: (context) => LabourList(
                           job: 'Plumping',
+                          category: plumpingtext[index],
                         ),
                     fullscreenDialog: true));
               },
