@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/utilities/utilities.dart';
@@ -46,6 +47,27 @@ class _CalendarBookingState extends State<CalendarBooking> {
   decrementCounter() {
     setState(() {
       counter--;
+    });
+  }
+
+  TextEditingController name = TextEditingController();
+  TextEditingController number = TextEditingController();
+  TextEditingController notes = TextEditingController();
+  TextEditingController address = TextEditingController();
+
+  addBooking() async {
+    await FirebaseFirestore.instance.collection('bookings').add({
+      'labour_name': widget.labourName,
+      'age': widget.labourAge,
+      'labour_address': widget.labourAddress,
+      'details': widget.labourDetails,
+      'image': widget.image,
+      'job': widget.job,
+      'labour_phone': widget.phone,
+      'name': name.text,
+      'notes': notes.text,
+      'number': number.text,
+      'address': address.text,
     });
   }
 
@@ -203,7 +225,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
               ),
               Card(
                 child: Container(
-                  height: 200,
+                  height: 80,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -224,7 +246,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
               Divider(),
               Card(
                 child: Container(
-                  height: 200,
+                  height: 80,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -243,7 +265,37 @@ class _CalendarBookingState extends State<CalendarBooking> {
                 ),
               ),
               Divider(),
-              ElevatedButton(onPressed: () {}, child: Text("Book"))
+              Card(
+                child: Container(
+                  height: 200,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: LinearGradient(
+                          colors: [theme_color, Colors.white],
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        labelText: 'Your Address',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(),
+              ElevatedButton(
+                onPressed: () {},
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.purple)),
+                child: Text(
+                  "Book",
+                  style: TextStyle(color: Colors.black),
+                ),
+              )
             ],
           ),
         ));

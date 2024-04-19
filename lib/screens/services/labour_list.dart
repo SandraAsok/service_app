@@ -79,10 +79,10 @@ class _LabourListState extends State<LabourList> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.all(20.0),
+                                      padding: const EdgeInsets.all(20.0),
                                       child: Text(
                                         document['name'],
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -98,7 +98,7 @@ class _LabourListState extends State<LabourList> {
                                           launchUrl(url);
                                         }
                                       },
-                                      icon: Icon(Icons.phone),
+                                      icon: const Icon(Icons.phone),
                                     ),
                                     ElevatedButton.icon(
                                       onPressed: () {
@@ -119,8 +119,9 @@ class _LabourListState extends State<LabourList> {
                                               ),
                                             ));
                                       },
-                                      icon: Icon(Icons.calendar_month_outlined),
-                                      label: Text("Book"),
+                                      icon: const Icon(
+                                          Icons.calendar_month_outlined),
+                                      label: const Text("Book"),
                                     ),
                                     CircleAvatar(
                                       backgroundColor: Colors.purple,
@@ -139,7 +140,7 @@ class _LabourListState extends State<LabourList> {
                     } else if (snapshot.hasError) {
                       log("ERROR While Loading labours ::: ${snapshot.error}");
                     }
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   },
                 ),
               ),
