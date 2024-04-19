@@ -1,9 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
@@ -11,6 +17,8 @@ class Calendar extends StatefulWidget {
   @override
   State<Calendar> createState() => _CalendarState();
 }
+
+String _phone = '';
 
 class _CalendarState extends State<Calendar> {
   DateTime today = DateTime.now();
@@ -93,54 +101,82 @@ class _CalendarState extends State<Calendar> {
                 ),
               ),
               Divider(),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  child: Container(
-                    height: 100,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        gradient: LinearGradient(
-                            colors: [theme_color, Colors.white],
-                            begin: Alignment.bottomRight,
-                            end: Alignment.topLeft)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: ListTile(
-                        title: Text(
-                          'Working Hours',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text('Cost is per hour'),
-                        trailing: SizedBox(
-                          width: 110,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CircleAvatar(
-                                  child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.add),
-                              )),
-                              Text(
-                                '0',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+              StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('bookings')
+                      .where('userId',
+                          isEqualTo: FirebaseAuth.instance.currentUser!.email)
+                      .where('booked_date',
+                          isEqualTo: today.toString().split(" ")[0])
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final document = snapshot.data!.docs[index];
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Slidable(
+                              endActionPane: ActionPane(
+                                motion: StretchMotion(),
+                                children: [
+                                  SlidableAction(
+                                    onPressed: (context) async {
+                                      setState(() {
+                                        _phone = document['labour_phone'];
+                                      });
+                                      final url =
+                                          Uri(scheme: 'tel', path: _phone);
+                                      if (await canLaunchUrl(url)) {
+                                        launchUrl(url);
+                                      }
+                                    },
+                                    backgroundColor: theme_color,
+                                    icon: Icons.phone,
+                                  )
+                                ],
                               ),
-                              CircleAvatar(
-                                child: IconButton(
-                                    onPressed: () {}, icon: Icon(Icons.remove)),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Divider(),
+                              child: Container(
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    color: theme_color.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Spacer(),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                              '${document['category']} - ${document['labour_name']}',
+                                              style: normalStyle),
+                                          Text(
+                                              'Total working hours : ${document['hours']}',
+                                              style: normalStyle),
+                                          Text(today.toString().split(" ")[0],
+                                              style: normalStyle),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      Icon(Icons.swipe_left, size: 35),
+                                      SizedBox(width: 10),
+                                    ],
+                                  )),
+                            ),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      log('ERROR ::: ${snapshot.error}');
+                    }
+                    return CircularProgressIndicator();
+                  })
             ],
           ),
         ));

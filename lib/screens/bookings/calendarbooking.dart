@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/utilities/utilities.dart';
@@ -60,6 +61,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
   addBooking() async {
     try {
       await FirebaseFirestore.instance.collection('bookings').add({
+        'userId': FirebaseAuth.instance.currentUser!.email,
         'category': widget.category,
         'labour_name': widget.labourName,
         'age': widget.labourAge,
@@ -72,7 +74,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
         'notes': notes.text,
         'number': number.text,
         'address': address.text,
-        'booked_date': today,
+        'booked_date': today.toString().split(" ")[0],
         'hours': counter,
       });
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

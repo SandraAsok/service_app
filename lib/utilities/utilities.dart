@@ -11,6 +11,8 @@ TextStyle main_style = GoogleFonts.abhayaLibre(
   fontSize: 25,
 );
 
+TextStyle normalStyle = TextStyle(fontWeight: FontWeight.bold);
+
 TextStyle button_style = GoogleFonts.abhayaLibre(
   color: theme_color,
   fontWeight: FontWeight.bold,
