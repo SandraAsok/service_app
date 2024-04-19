@@ -328,6 +328,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                   number.clear();
                   notes.clear();
                   address.clear();
+                  Navigator.pop(context);
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.purple)),
