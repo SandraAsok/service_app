@@ -41,7 +41,7 @@ class _LabourDetailState extends State<LabourDetail> {
             padding: const EdgeInsets.all(20),
             child: CircleAvatar(
               backgroundImage: NetworkImage(widget.image),
-              radius: 70,
+              radius: 90,
             ),
           ),
           Text(
