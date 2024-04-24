@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:service_app/main.dart';
 import 'package:service_app/screens/bookings/calendarbooking.dart';
-import 'package:service_app/screens/home/home.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -114,7 +114,7 @@ class _LabourDetailState extends State<LabourDetail> {
             Navigator.push(
                 context,
                 CupertinoPageRoute(
-                  builder: (context) => Home(),
+                  builder: (context) => const BottomNav(),
                 ));
           },
           backgroundColor: theme_color,
