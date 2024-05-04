@@ -6,7 +6,6 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:service_app/screens/bookings/calender.dart';
 import 'package:service_app/screens/home/home.dart';
 import 'package:service_app/screens/settings/settings.dart';
-import 'package:service_app/screens/support/support.dart';
 import 'package:service_app/screens/welcome.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -85,7 +84,6 @@ class BottomNav extends StatefulWidget {
 final List<Widget> _pages = [
   const Home(),
   const Calendar(),
-  const Support(),
   const Settings(),
 ];
 
@@ -114,7 +112,6 @@ class _BottomNavState extends State<BottomNav> {
                 text: 'Home'),
             const GButton(
                 icon: Icons.calendar_month_outlined, text: 'Bookings'),
-            const GButton(icon: Icons.support_agent, text: 'Support'),
             const GButton(icon: Icons.settings, text: 'Settings'),
           ]),
     );
