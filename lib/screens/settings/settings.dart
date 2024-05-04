@@ -1,7 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:service_app/utilities/list.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class Settings extends StatefulWidget {
@@ -20,34 +17,91 @@ class _SettingsState extends State<Settings> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: CircleAvatar(
-                  radius: 60,
+                padding: EdgeInsets.all(10.0),
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.purple)),
+                  child: Center(child: Text("logo")),
                 ),
               ),
               space,
-              ListView.builder(
+              ListView(
                 shrinkWrap: true,
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(3.0),
+                children: const [
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
                     child: Card(
                       elevation: 10,
                       child: SizedBox(
                         height: 60,
                         child: ListTile(
-                          title: Text(settings[index]),
-                          subtitle: Text(settingsub[index]),
-                          trailing: settingsIcon[index],
+                          title: Text('Help Center'),
+                          trailing: Icon(Icons.support_agent),
                         ),
                       ),
                     ),
-                  );
-                },
-                // separatorBuilder: (BuildContext context, int index) {
-                //   return Divider();
-                // },
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
+                    child: Card(
+                      elevation: 10,
+                      child: SizedBox(
+                        height: 60,
+                        child: ListTile(
+                          title: Text('About'),
+                          trailing: Icon(Icons.info),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
+                    child: Card(
+                      elevation: 10,
+                      child: SizedBox(
+                        height: 60,
+                        child: ListTile(
+                          title: Text('Privacy Policy'),
+                          trailing: Icon(Icons.lock),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
+                    child: Card(
+                      elevation: 10,
+                      child: SizedBox(
+                        height: 60,
+                        child: ListTile(
+                          title: Text('Terms and Conditions'),
+                          trailing: Icon(Icons.library_add_check),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: EdgeInsets.all(3.0),
+                    child: Card(
+                      elevation: 10,
+                      child: SizedBox(
+                        height: 60,
+                        child: ListTile(
+                          title: Text('Log out'),
+                          trailing: Icon(Icons.logout),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                ],
               ),
             ],
           ),

@@ -43,20 +43,6 @@ List<String> additionaltitle = [
   "Rental",
   "Vehicle Service",
 ];
-List settings = [
-  'Account Settings',
-  'About',
-  'Privacy Policy',
-  'Version',
-  'Log Out'
-];
-List settingsIcon = [
-  Icon(Icons.settings_outlined),
-  Icon(Icons.info_outline),
-  Icon(Icons.book_outlined),
-  Icon(Icons.phone_android),
-  Icon(Icons.logout)
-];
 
 List<String> serviceimages = [
   "assets/images/electricalwork.jpg",
