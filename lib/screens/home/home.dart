@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:service_app/screens/bookings/bookings.dart';
 import 'package:service_app/screens/services/additional_services/additional_services.dart';
 import 'package:service_app/screens/services/additional_services/sub_screens/bakery.dart';
 import 'package:service_app/screens/services/additional_services/sub_screens/clothing.dart';
@@ -59,42 +60,28 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          centerTitle: true,
           title: Text(
             "A 2 Z SERVICE",
             style: GoogleFonts.breeSerif(
                 fontWeight: FontWeight.w800, fontSize: 35),
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.bookmark)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyBookings(),
+                      ));
+                },
+                icon: Icon(Icons.bookmark))
           ],
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 50),
-              space,
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      gradient: LinearGradient(
-                        colors: [theme_color, Colors.white],
-                      )),
-                  child: TextFormField(
-                    cursorColor: Colors.white,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      filled: true,
-                      prefixIcon: Icon(Icons.search, color: Colors.black),
-                      focusColor: Colors.white,
-                      hintText: 'Search',
-                      hintStyle: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
+              const SizedBox(height: 20),
               space,
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -103,7 +90,8 @@ class _HomeState extends State<Home> {
                   children: [
                     const Text(
                       'Services',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     TextButton(
                         onPressed: () {
