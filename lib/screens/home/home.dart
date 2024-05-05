@@ -72,10 +72,10 @@ class _HomeState extends State<Home> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MyBookings(),
+                        builder: (context) => const MyBookings(),
                       ));
                 },
-                icon: Icon(Icons.bookmark))
+                icon: const Icon(Icons.bookmark))
           ],
         ),
         body: SingleChildScrollView(
