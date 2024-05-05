@@ -2,8 +2,10 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:service_app/screens/Login/login.dart';
 import 'package:service_app/screens/settings/popup.dart';
 import 'package:service_app/utilities/utilities.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
@@ -111,8 +113,12 @@ class _SettingsState extends State<Settings> {
                         child: SizedBox(
                           height: 60,
                           child: GestureDetector(
-                            onTap: () => SettingPopup(
-                                mdFilename: 'assets/privacypolicy.md'),
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SettingPopup(
+                                      mdFilename: 'privacypolicy.md'),
+                                )),
                             child: const ListTile(
                               title: Text('Privacy Policy'),
                               trailing: Icon(Icons.lock),
@@ -133,8 +139,7 @@ class _SettingsState extends State<Settings> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SettingPopup(
-                                      mdFilename:
-                                          'assets/termsandconditions.md'),
+                                      mdFilename: 'termsandconditions.md'),
                                 )),
                             child: const ListTile(
                               title: Text('Terms and Conditions'),
@@ -152,7 +157,16 @@ class _SettingsState extends State<Settings> {
                         child: SizedBox(
                           height: 60,
                           child: GestureDetector(
-                            onTap: () => FirebaseAuth.instance.signOut(),
+                            onTap: () async {
+                              FirebaseAuth.instance.signOut();
+                              final SharedPreferences sharedPreferences =
+                                  await SharedPreferences.getInstance();
+                              sharedPreferences.setString('email', '');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) => SignUp())));
+                            },
                             child: const ListTile(
                               title: Text('Log out'),
                               trailing: Icon(Icons.logout),

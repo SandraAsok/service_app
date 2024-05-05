@@ -30,8 +30,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
-</manifest>
-<!-- Provide required visibility configuration for API level 30 and above -->
+    <!-- Provide required visibility configuration for API level 30 and above -->
 <queries>
   <!-- If your app checks for SMS support -->
   <intent>
@@ -53,3 +52,5 @@
     <data android:scheme="mailto" />
   </intent>
 </queries>
+</manifest>
+

@@ -40,7 +40,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     getValidationData().whenComplete(
       () async {
-        if (finalemail == null) {
+        if (finalemail == '') {
           Navigator.push(
               context,
               MaterialPageRoute(

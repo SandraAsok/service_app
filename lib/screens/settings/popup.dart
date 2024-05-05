@@ -29,7 +29,7 @@ class SettingPopup extends StatelessWidget {
                     styleSheet: MarkdownStyleSheet.fromTheme(ThemeData(
                         textTheme: const TextTheme(
                             bodyMedium: TextStyle(
-                                fontSize: 15.0, color: Colors.black)))),
+                                fontSize: 15.0, color: Colors.white)))),
                     data: snapshot.data.toString());
               }
               return const Center(
@@ -50,7 +50,7 @@ class SettingPopup extends StatelessWidget {
               width: double.infinity,
               child: const Text(
                 'OK',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               ),
             ),
           )
