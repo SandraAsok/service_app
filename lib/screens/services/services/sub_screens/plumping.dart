@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:service_app/screens/services/labour_list.dart';
+import 'package:service_app/screens/labour/labour_list.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class Plumping extends StatefulWidget {

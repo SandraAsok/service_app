@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/bakery/bakery_booking.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class BakeryDetail extends StatefulWidget {
@@ -64,7 +65,14 @@ class _BakeryDetailState extends State<BakeryDetail> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                BakeryBooking(category: bakerytext[index]),
+                          ));
+                    },
                     child: Container(
                       height: 200,
                       width: 190,

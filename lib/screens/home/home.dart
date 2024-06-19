@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/screens/bookings/bookings.dart';
 import 'package:service_app/screens/services/additional_services/additional_services.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/bakery.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/bakery/bakery.dart';
 import 'package:service_app/screens/services/additional_services/sub_screens/clothing.dart';
 import 'package:service_app/screens/services/additional_services/sub_screens/decoration.dart';
 import 'package:service_app/screens/services/additional_services/sub_screens/groceries.dart';

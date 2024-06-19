@@ -26,7 +26,7 @@ void main() {
   ));
 }
 
-String? finalemail;
+bool? finalemail;
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -40,7 +40,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     getValidationData().whenComplete(
       () async {
-        if (finalemail == '') {
+        if (finalemail == false) {
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -61,16 +61,16 @@ class _SplashState extends State<Splash> {
   Future getValidationData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var obtainedEmail = sharedPreferences.getString('email');
+    var obtainedEmail = sharedPreferences.getBool('email');
     setState(() {
       finalemail = obtainedEmail!;
     });
-    log(finalemail!);
+    log(finalemail!.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Welcome();
   }
 }
 

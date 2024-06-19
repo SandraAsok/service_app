@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:service_app/screens/bookings/calendarbooking.dart';
-import 'package:service_app/screens/services/labour_detail.dart';
+import 'package:service_app/screens/labour/labour_detail.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:url_launcher/url_launcher.dart';
 

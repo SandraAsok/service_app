@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_declarations, non_constant_identifier_names
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:service_app/screens/Login/login.dart';
@@ -161,7 +159,7 @@ class _SettingsState extends State<Settings> {
                               FirebaseAuth.instance.signOut();
                               final SharedPreferences sharedPreferences =
                                   await SharedPreferences.getInstance();
-                              sharedPreferences.setString('email', '');
+                              sharedPreferences.setBool('email', false);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

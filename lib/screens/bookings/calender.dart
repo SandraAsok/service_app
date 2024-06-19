@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,6 +19,8 @@ class Calendar extends StatefulWidget {
 String _phone = '';
 
 class _CalendarState extends State<Calendar> {
+  TextEditingController review = TextEditingController();
+
   DateTime today = DateTime.now();
   void onDayselected(selectedDay, focusedDay) {
     setState(() {
@@ -117,7 +117,7 @@ class _CalendarState extends State<Calendar> {
                         itemBuilder: (context, index) {
                           final document = snapshot.data!.docs[index];
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Slidable(
                               endActionPane: ActionPane(
                                 motion: StretchMotion(),
@@ -135,7 +135,60 @@ class _CalendarState extends State<Calendar> {
                                     },
                                     backgroundColor: theme_color,
                                     icon: Icons.phone,
-                                  )
+                                  ),
+                                  SlidableAction(
+                                    onPressed: (context) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                                "share your feedback here"),
+                                            content: TextField(
+                                              maxLines: 5,
+                                              controller: review,
+                                              decoration: InputDecoration(
+                                                  hintText: 'Type here'),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Cancel")),
+                                              TextButton(
+                                                  onPressed: () async {
+                                                    await FirebaseFirestore
+                                                        .instance
+                                                        .collection('feedbacks')
+                                                        .add({
+                                                      'review': review.text,
+                                                      'category':
+                                                          document['category'],
+                                                      'labour_name': document[
+                                                          'labour_name'],
+                                                      'userID': FirebaseAuth
+                                                          .instance
+                                                          .currentUser!
+                                                          .email,
+                                                    });
+                                                    review.clear();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(SnackBar(
+                                                            content: Text(
+                                                                "Feedback sent successfully")));
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text("Done"))
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    backgroundColor: theme_color,
+                                    icon: Icons.sms,
+                                  ),
                                 ],
                               ),
                               child: Container(
@@ -163,6 +216,45 @@ class _CalendarState extends State<Calendar> {
                                               style: normalStyle),
                                         ],
                                       ),
+                                      Spacer(),
+                                      ElevatedButton(
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  content:
+                                                      Text("Are you sure ?"),
+                                                  actions: [
+                                                    TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("No")),
+                                                    TextButton(
+                                                        onPressed: () async {
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'bookings')
+                                                              .doc(document.id)
+                                                              .delete();
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(SnackBar(
+                                                                  content: Text(
+                                                                      "Booking Cancelled Successfully")));
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("Yes")),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: Text("cancel")),
                                       Spacer(),
                                       Icon(Icons.swipe_left, size: 35),
                                       SizedBox(width: 10),
