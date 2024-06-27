@@ -162,7 +162,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                             formatButtonVisible: false, titleCentered: true),
                         shouldFillViewport: true,
                         pageJumpingEnabled: true,
-                        weekendDays: [DateTime.saturday, DateTime.sunday],
+                        weekendDays: const [DateTime.saturday, DateTime.sunday],
                         selectedDayPredicate: (day) => isSameDay(day, today),
                         focusedDay: today,
                         firstDay: DateTime.utc(2024, 01, 01),

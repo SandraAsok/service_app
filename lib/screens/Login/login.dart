@@ -18,6 +18,15 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
+
+  bool _obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     signup() async {
@@ -83,13 +92,19 @@ class _SignUpState extends State<SignUp> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: _password,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.lock),
                             label: Text('Password', style: black_style),
                             hintText: 'Type Here',
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20))),
+                                borderRadius: BorderRadius.circular(20)),
+                            suffixIcon: IconButton(
+                              icon: Icon(_obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                              onPressed: _togglePasswordVisibility,
+                            )),
                       ),
                     ),
                     space,

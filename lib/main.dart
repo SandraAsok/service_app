@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:service_app/screens/bookings/calender.dart';
+import 'package:service_app/screens/cart/cart.dart';
 import 'package:service_app/screens/home/home.dart';
 import 'package:service_app/screens/settings/settings.dart';
 import 'package:service_app/screens/welcome.dart';
@@ -70,7 +71,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Welcome();
+    return const Welcome();
   }
 }
 
@@ -84,6 +85,7 @@ class BottomNav extends StatefulWidget {
 final List<Widget> _pages = [
   const Home(),
   const Calendar(),
+  const Cart(),
   const Settings(),
 ];
 
@@ -112,6 +114,7 @@ class _BottomNavState extends State<BottomNav> {
                 text: 'Home'),
             const GButton(
                 icon: Icons.calendar_month_outlined, text: 'Bookings'),
+            const GButton(icon: Icons.shopping_cart, text: 'Cart'),
             const GButton(icon: Icons.settings, text: 'Settings'),
           ]),
     );

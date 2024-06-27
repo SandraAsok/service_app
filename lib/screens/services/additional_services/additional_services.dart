@@ -2,14 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:service_app/screens/services/additional_services/sub_screens/bakery/bakery.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/clothing.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/decoration.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/general.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/groceries.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/rental.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/saloon.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/tailoring.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/vehicle.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/groceries/groceries.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/babysitting/babysitting.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/petsitting/petsitting.dart';
 import 'package:service_app/utilities/list.dart';
 import 'package:service_app/utilities/utilities.dart';
 
@@ -21,22 +16,22 @@ class AdditionalServices extends StatefulWidget {
 }
 
 class _AdditionalServicesState extends State<AdditionalServices> {
-  final List<Widget> additionalscreens1 = [
+  List<Widget> additionalscreens = [
     const BakeryDetail(),
-    const Clothing(),
-    const Tailoring(),
-    const Saloon(),
-  ];
-
-  final List<Widget> additionalscreens2 = [
+    // const Clothing(),
+    // const Tailoring(),
+    // const Saloon(),
     const Groceries(),
-    const DecorationService(),
-    const Rental(),
-    const Vehicle(),
+    // const DecorationService(),
+    const BabySitting(),
+    const Petsitting(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 3;
+    final double itemWidth = size.width / 2;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -50,181 +45,248 @@ class _AdditionalServicesState extends State<AdditionalServices> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int index) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) =>
-                                      additionalscreens1[index],
-                                  fullscreenDialog: true));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 190,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  image: AssetImage(addimages1[index]),
-                                  fit: BoxFit.cover)),
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [
-                                          Colors.white.withOpacity(0),
-                                          theme_color.withOpacity(0.7)
-                                        ],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight),
-                                    borderRadius: BorderRadius.circular(20)),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.6),
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      addtext1[index],
-                                      style: GoogleFonts.oswald(
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 25),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              CupertinoPageRoute(
-                                  builder: (context) =>
-                                      additionalscreens2[index],
-                                  fullscreenDialog: true));
-                        },
-                        child: Container(
-                          height: 200,
-                          width: 190,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  image: AssetImage(addimages2[index]),
-                                  fit: BoxFit.cover)),
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [
-                                          Colors.white.withOpacity(0),
-                                          theme_color.withOpacity(0.7)
-                                        ],
-                                        begin: Alignment.topRight,
-                                        end: Alignment.bottomLeft),
-                                    borderRadius: BorderRadius.circular(20)),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Colors.white.withOpacity(0.6),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      addtext2[index],
-                                      style: GoogleFonts.oswald(
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 25),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
+            SizedBox(
+              height: size.height,
+              child: GridView.builder(
+                itemCount: additional.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 0.5,
+                    crossAxisSpacing: 0.5,
+                    childAspectRatio: (itemWidth / itemHeight),
+                    crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                              builder: (context) => const General(),
+                              builder: (context) => additionalscreens[index],
                               fullscreenDialog: true));
                     },
-                    child: Container(
-                      height: 200,
-                      width: 190,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: AssetImage(addimages1[4]),
-                              fit: BoxFit.cover)),
-                      child: Stack(
-                        alignment: Alignment.bottomCenter,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    colors: [
-                                      Colors.white.withOpacity(0),
-                                      theme_color.withOpacity(0.7)
-                                    ],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight),
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.6),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Text(
-                              "GENERAL",
-                              style: GoogleFonts.oswald(
-                                  fontWeight: FontWeight.w900, fontSize: 25),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Container(
+                        height: 200,
+                        width: 190,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                                image: AssetImage(additional[index]),
+                                fit: BoxFit.cover)),
+                        child: Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        Colors.white.withOpacity(0),
+                                        theme_color.withOpacity(0.7)
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight),
+                                  borderRadius: BorderRadius.circular(20)),
                             ),
-                          )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.6),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    additionaltext[index],
+                                    style: GoogleFonts.oswald(
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 25),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                const Spacer(),
-              ],
+                  );
+                },
+              ),
             ),
+            // ListView.builder(
+            //   shrinkWrap: true,
+            //   physics: const NeverScrollableScrollPhysics(),
+            //   itemCount: 4,
+            //   itemBuilder: (BuildContext context, int index) {
+            //     return Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: [
+            //         Padding(
+            //           padding: const EdgeInsets.all(5.0),
+            //           child: GestureDetector(
+            //             onTap: () {
+            //               Navigator.push(
+            //                   context,
+            //                   CupertinoPageRoute(
+            //                       builder: (context) =>
+            //                           additionalscreens1[index],
+            //                       fullscreenDialog: true));
+            //             },
+            //             child: Container(
+            //               height: 200,
+            //               width: 190,
+            //               decoration: BoxDecoration(
+            //                   borderRadius: BorderRadius.circular(20),
+            //                   image: DecorationImage(
+            //                       image: AssetImage(addimages1[index]),
+            //                       fit: BoxFit.cover)),
+            //               child: Stack(
+            //                 alignment: Alignment.bottomCenter,
+            //                 children: [
+            //                   Container(
+            //                     decoration: BoxDecoration(
+            //                         gradient: LinearGradient(
+            //                             colors: [
+            //                               Colors.white.withOpacity(0),
+            //                               theme_color.withOpacity(0.7)
+            //                             ],
+            //                             begin: Alignment.topLeft,
+            //                             end: Alignment.bottomRight),
+            //                         borderRadius: BorderRadius.circular(20)),
+            //                   ),
+            //                   Padding(
+            //                     padding: const EdgeInsets.all(8.0),
+            //                     child: Container(
+            //                       decoration: BoxDecoration(
+            //                           color: Colors.white.withOpacity(0.6),
+            //                           borderRadius: BorderRadius.circular(20)),
+            //                       child: Padding(
+            //                         padding: const EdgeInsets.all(8.0),
+            //                         child: Text(
+            //                           addtext1[index],
+            //                           style: GoogleFonts.oswald(
+            //                               fontWeight: FontWeight.w900,
+            //                               fontSize: 25),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //         Padding(
+            //           padding: const EdgeInsets.all(8.0),
+            //           child: GestureDetector(
+            //             onTap: () {
+            //               Navigator.push(
+            //                   context,
+            //                   CupertinoPageRoute(
+            //                       builder: (context) =>
+            //                           additionalscreens2[index],
+            //                       fullscreenDialog: true));
+            //             },
+            //             child: Container(
+            //               height: 200,
+            //               width: 190,
+            //               decoration: BoxDecoration(
+            //                   borderRadius: BorderRadius.circular(20),
+            //                   image: DecorationImage(
+            //                       image: AssetImage(addimages2[index]),
+            //                       fit: BoxFit.cover)),
+            //               child: Stack(
+            //                 alignment: Alignment.bottomCenter,
+            //                 children: [
+            //                   Container(
+            //                     decoration: BoxDecoration(
+            //                         gradient: LinearGradient(
+            //                             colors: [
+            //                               Colors.white.withOpacity(0),
+            //                               theme_color.withOpacity(0.7)
+            //                             ],
+            //                             begin: Alignment.topRight,
+            //                             end: Alignment.bottomLeft),
+            //                         borderRadius: BorderRadius.circular(20)),
+            //                   ),
+            //                   Padding(
+            //                     padding: const EdgeInsets.all(8.0),
+            //                     child: Container(
+            //                       decoration: BoxDecoration(
+            //                         borderRadius: BorderRadius.circular(20),
+            //                         color: Colors.white.withOpacity(0.6),
+            //                       ),
+            //                       child: Padding(
+            //                         padding: const EdgeInsets.all(8.0),
+            //                         child: Text(
+            //                           addtext2[index],
+            //                           style: GoogleFonts.oswald(
+            //                               fontWeight: FontWeight.w900,
+            //                               fontSize: 25),
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   )
+            //                 ],
+            //               ),
+            //             ),
+            //           ),
+            //         ),
+            //       ],
+            //     );
+            //   },
+            // ),
+            // Row(
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: GestureDetector(
+            //         onTap: () {
+            //           Navigator.push(
+            //               context,
+            //               CupertinoPageRoute(
+            //                   builder: (context) => const General(),
+            //                   fullscreenDialog: true));
+            //         },
+            //         child: Container(
+            //           height: 200,
+            //           width: 190,
+            //           decoration: BoxDecoration(
+            //               borderRadius: BorderRadius.circular(20),
+            //               image: DecorationImage(
+            //                   image: AssetImage(addimages1[4]),
+            //                   fit: BoxFit.cover)),
+            //           child: Stack(
+            //             alignment: Alignment.bottomCenter,
+            //             children: [
+            //               Container(
+            //                 decoration: BoxDecoration(
+            //                     gradient: LinearGradient(
+            //                         colors: [
+            //                           Colors.white.withOpacity(0),
+            //                           theme_color.withOpacity(0.7)
+            //                         ],
+            //                         begin: Alignment.topLeft,
+            //                         end: Alignment.bottomRight),
+            //                     borderRadius: BorderRadius.circular(20)),
+            //               ),
+            //               Container(
+            //                 decoration: BoxDecoration(
+            //                     color: Colors.white.withOpacity(0.6),
+            //                     borderRadius: BorderRadius.circular(20)),
+            //                 child: Text(
+            //                   "GENERAL",
+            //                   style: GoogleFonts.oswald(
+            //                       fontWeight: FontWeight.w900, fontSize: 25),
+            //                 ),
+            //               )
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     const Spacer(),
+            //   ],
+            // ),
           ],
         ),
       ),

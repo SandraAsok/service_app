@@ -53,7 +53,7 @@ class _LabourListState extends State<LabourList> {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  CupertinoPageRoute(
+                                  MaterialPageRoute(
                                     builder: (context) => LabourDetail(
                                       name: document['name'],
                                       image: document['image'][0],

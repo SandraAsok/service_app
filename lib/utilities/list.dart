@@ -21,25 +21,22 @@ List<String> category = [
 
 List<String> additional = [
   "assets/images/bakery.webp",
-  "assets/images/clothes.jpg",
-  "assets/images/tailoring.jpg",
-  "assets/images/saloon.png",
-  "assets/images/general.jpeg",
   "assets/images/groceries.jpg",
-  "assets/images/decoration.jpeg",
-  "assets/images/rental.jpg",
-  "assets/images/vehicle.jpg",
+  "assets/images/babysitting.jpeg",
+  "assets/images/petsitting.jpg",
 ];
 List<String> additionaltitle = [
   "Bakery",
-  "Clothing",
-  "Tailoring",
-  "Saloon",
-  "General Service",
+  // "Clothing",
+  // "Tailoring",
+  // "Saloon",
+  // "General Service",
   "Groceries",
-  "Decoration",
-  "Rental",
-  "Vehicle Service",
+  // "Decoration",
+  // "BabySitting",
+  // "Petsitting Service",
+  "Baby Sitting",
+  "Pet Sitting",
 ];
 
 List<String> serviceimages = [
@@ -64,26 +61,30 @@ List<String> servicetext = [
 
 List<String> additionalimages = [
   "assets/images/bakery.webp",
-  "assets/images/clothes.jpg",
-  "assets/images/tailoring.jpg",
-  "assets/images/saloon.png",
-  "assets/images/general.jpeg",
+  // "assets/images/clothes.jpg",
+  // "assets/images/tailoring.jpg",
+  // "assets/images/saloon.png",
+  // "assets/images/general.jpeg",
   "assets/images/groceries.jpg",
-  "assets/images/decoration.jpeg",
-  "assets/images/rental.jpg",
-  "assets/images/vehicle.jpg",
+  // "assets/images/decoration.jpeg",
+  // "assets/images/BabySitting.jpg",
+  // "assets/images/Petsitting.jpg",
+  "assets/images/babysitting.jpeg",
+  "assets/images/petsitting.jpg",
 ];
 
 List<String> additionaltext = [
   "BAKERY",
-  "CLOTHING",
-  "TAILORING",
-  "SALOON",
-  "GENERAL",
+  // "CLOTHING",
+  // "TAILORING",
+  // "SALOON",
+  // "GENERAL",
   "GROCERIES",
-  "DECORATION",
-  "RENTAL",
-  "VEHICLE"
+  // "DECORATION",
+  // "BabySitting",
+  // "Petsitting"
+  "BABY SITTING",
+  "PET SITTING",
 ];
 List timeColor = [
   Colors.white,
@@ -103,34 +104,4 @@ List<String> settingsub = [
   " ",
   " 1.0.1 ",
   " ",
-];
-
-List<String> addimages1 = [
-  "assets/images/bakery.webp",
-  "assets/images/clothes.jpg",
-  "assets/images/tailoring.jpg",
-  "assets/images/saloon.png",
-  "assets/images/general.jpeg",
-];
-
-List<String> addimages2 = [
-  "assets/images/groceries.jpg",
-  "assets/images/decoration.jpeg",
-  "assets/images/rental.jpg",
-  "assets/images/vehicle.jpg",
-];
-
-List<String> addtext1 = [
-  "BAKERY",
-  "CLOTHING",
-  "TAILORING",
-  "SALOON",
-  "GENERAL",
-];
-
-List<String> addtext2 = [
-  "GROCERIES",
-  "DECORATION",
-  "RENTAL",
-  "VEHICLE",
 ];

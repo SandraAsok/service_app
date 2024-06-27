@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:service_app/utilities/utilities.dart';
 
-class BakeryBooking extends StatelessWidget {
-  final String category;
-  const BakeryBooking({super.key, required this.category});
+class Groceries extends StatefulWidget {
+  const Groceries({super.key});
 
+  @override
+  State<Groceries> createState() => _GroceriesState();
+}
+
+class _GroceriesState extends State<Groceries> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,7 +38,7 @@ class BakeryBooking extends StatelessWidget {
                       space,
                       space,
                       Text(
-                        "Cochin Bakery",
+                        "Reliance Fresh",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),

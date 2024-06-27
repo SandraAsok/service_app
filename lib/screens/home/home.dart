@@ -1,16 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:service_app/screens/bookings/bookings.dart';
 import 'package:service_app/screens/services/additional_services/additional_services.dart';
 import 'package:service_app/screens/services/additional_services/sub_screens/bakery/bakery.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/clothing.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/decoration.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/groceries.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/rental.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/saloon.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/tailoring.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/vehicle.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/groceries/groceries.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/babysitting/babysitting.dart';
+import 'package:service_app/screens/services/additional_services/sub_screens/petsitting/petsitting.dart';
 import 'package:service_app/screens/services/services/all_services.dart';
 import 'package:service_app/screens/services/services/sub_screens/appliances.dart';
 import 'package:service_app/screens/services/services/sub_screens/cleaning.dart';
@@ -41,13 +36,9 @@ List<Widget> categoryscreens = [
 
 List<Widget> additionalscreens = [
   const BakeryDetail(),
-  const Clothing(),
-  const Tailoring(),
-  const Saloon(),
   const Groceries(),
-  const DecorationService(),
-  const Rental(),
-  const Vehicle(),
+  const BabySitting(),
+  const Petsitting(),
 ];
 
 class _HomeState extends State<Home> {
@@ -69,11 +60,11 @@ class _HomeState extends State<Home> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const MyBookings(),
-                      ));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const MyBookings(),
+                  //     ));
                 },
                 icon: const Icon(Icons.bookmark))
           ],

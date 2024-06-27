@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,6 +24,7 @@ class _CalendarState extends State<Calendar> {
   TextEditingController review = TextEditingController();
 
   DateTime today = DateTime.now();
+
   void onDayselected(selectedDay, focusedDay) {
     setState(() {
       today = selectedDay;
