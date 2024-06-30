@@ -1,20 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:service_app/screens/services/additional_services/additional_services.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/bakery/bakery.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/groceries/groceries.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/babysitting/babysitting.dart';
-import 'package:service_app/screens/services/additional_services/sub_screens/petsitting/petsitting.dart';
-import 'package:service_app/screens/services/services/all_services.dart';
-import 'package:service_app/screens/services/services/sub_screens/appliances.dart';
-import 'package:service_app/screens/services/services/sub_screens/cleaning.dart';
-import 'package:service_app/screens/services/services/sub_screens/electrical.dart';
-import 'package:service_app/screens/services/services/sub_screens/furniture.dart';
-import 'package:service_app/screens/services/services/sub_screens/homeshifting.dart';
-import 'package:service_app/screens/services/services/sub_screens/painting.dart';
-import 'package:service_app/screens/services/services/sub_screens/plumping.dart';
-import 'package:service_app/utilities/list.dart';
+import 'package:service_app/screens/labour/labour_list.dart';
+import 'package:service_app/screens/services/additional_services.dart';
+import 'package:service_app/screens/services/all_services.dart';
+import 'package:service_app/screens/services/shop_booking.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class Home extends StatefulWidget {
@@ -23,23 +14,6 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
-
-List<Widget> categoryscreens = [
-  const Electrical(),
-  const Painting(),
-  const Plumping(),
-  const Appliances(),
-  const Cleaning(),
-  const HomeShifting(),
-  const Furniture(),
-];
-
-List<Widget> additionalscreens = [
-  const BakeryDetail(),
-  const Groceries(),
-  const BabySitting(),
-  const Petsitting(),
-];
 
 class _HomeState extends State<Home> {
   @override
@@ -89,7 +63,7 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) => const AllServices(),
+                                  builder: (context) => AllServices(),
                                   fullscreenDialog: true));
                         },
                         child: const Text(
@@ -105,39 +79,51 @@ class _HomeState extends State<Home> {
                   child: SizedBox(
                     height: 150,
                     width: double.infinity,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: titles.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      CupertinoPageRoute(
-                                          builder: (context) =>
-                                              categoryscreens[index],
-                                          fullscreenDialog: true));
-                                },
-                                child: CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: AssetImage(category[index]),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              titles[index],
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15),
-                            )
-                          ],
-                        );
-                      },
-                    ),
+                    child: StreamBuilder(
+                        stream: FirebaseFirestore.instance
+                            .collection('services')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              final document = snapshot.data!.docs[index];
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            CupertinoPageRoute(
+                                                builder: (context) =>
+                                                    LabourList(
+                                                        job: document[
+                                                            'service']),
+                                                //categoryscreens[index],
+                                                fullscreenDialog: true));
+                                      },
+                                      child: CircleAvatar(
+                                        radius: 40,
+                                        backgroundImage:
+                                            NetworkImage(document['cover']),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    document['service'],
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15),
+                                  )
+                                ],
+                              );
+                            },
+                          );
+                        }),
                   )),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -153,8 +139,7 @@ class _HomeState extends State<Home> {
                           Navigator.push(
                               context,
                               CupertinoPageRoute(
-                                  builder: (context) =>
-                                      const AdditionalServices(),
+                                  builder: (context) => AdditionalServices(),
                                   fullscreenDialog: true));
                         },
                         child: const Text(
@@ -165,63 +150,84 @@ class _HomeState extends State<Home> {
                 ),
               ),
               SingleChildScrollView(
-                child: GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: additional.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      mainAxisSpacing: 0.5,
-                      crossAxisSpacing: 0.5,
-                      childAspectRatio: (itemWidth / itemHeight),
-                      crossAxisCount: 2,
-                    ),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                CupertinoPageRoute(
-                                    builder: (context) =>
-                                        additionalscreens[index],
-                                    fullscreenDialog: true));
-                          },
-                          child: Column(
-                            children: [
-                              Stack(
-                                children: [
-                                  Container(
-                                    height: 200,
-                                    width: 300,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.2),
-                                          spreadRadius: 2,
-                                          blurRadius: 2,
-                                          offset: const Offset(0, 5),
+                child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('additionalservices')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      return GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.docs.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            mainAxisSpacing: 0.5,
+                            crossAxisSpacing: 0.5,
+                            childAspectRatio: (itemWidth / itemHeight),
+                            crossAxisCount: 2,
+                          ),
+                          itemBuilder: (context, index) {
+                            final document = snapshot.data!.docs[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  if (document['option'] == 'shop') {
+                                    Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                            builder: (context) => ShopBooking(
+                                                shop: document['service']),
+                                            fullscreenDialog: true));
+                                  } else {
+                                    Navigator.push(
+                                        context,
+                                        CupertinoPageRoute(
+                                            builder: (context) => LabourList(
+                                                  job: document['service'],
+                                                ),
+                                            fullscreenDialog: true));
+                                  }
+                                },
+                                child: Column(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        Container(
+                                          height: 200,
+                                          width: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.2),
+                                                spreadRadius: 2,
+                                                blurRadius: 2,
+                                                offset: const Offset(0, 5),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Image.network(
+                                            document['cover'],
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    child: Image.asset(
-                                      additional[index],
-                                      fit: BoxFit.cover,
+                                    space,
+                                    Text(
+                                      document['service'],
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                              space,
-                              Text(
-                                additionaltitle[index],
-                                style: const TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                            );
+                          });
                     }),
               ),
             ],

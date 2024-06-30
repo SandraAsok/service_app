@@ -10,11 +10,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class LabourList extends StatefulWidget {
   final String job;
-  final String category;
+
   const LabourList({
     super.key,
     required this.job,
-    required this.category,
   });
 
   @override
@@ -56,13 +55,12 @@ class _LabourListState extends State<LabourList> {
                                   MaterialPageRoute(
                                     builder: (context) => LabourDetail(
                                       name: document['name'],
-                                      image: document['image'][0],
+                                      image: document['image'],
                                       age: document['age'],
                                       details: document['details'],
                                       address: document['address'],
                                       phone: document['phone'],
                                       job: document['job'],
-                                      category: widget.category,
                                     ),
                                     fullscreenDialog: true,
                                   ),
@@ -83,10 +81,14 @@ class _LabourListState extends State<LabourList> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(20.0),
-                                      child: Text(
-                                        document['name'],
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
+                                      child: Container(
+                                        width: 100,
+                                        child: Text(
+                                          document['name'],
+                                          style: TextStyle(
+                                            overflow: TextOverflow.ellipsis,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -110,14 +112,13 @@ class _LabourListState extends State<LabourList> {
                                             CupertinoPageRoute(
                                               builder: (context) =>
                                                   CalendarBooking(
-                                                category: widget.category,
                                                 labourName: document['name'],
                                                 labourAddress:
                                                     document['address'],
                                                 labourAge: document['age'],
                                                 labourDetails:
                                                     document['details'],
-                                                image: document['image'][0],
+                                                image: document['image'],
                                                 job: document['job'],
                                                 phone: document['phone'],
                                               ),
@@ -131,7 +132,7 @@ class _LabourListState extends State<LabourList> {
                                       backgroundColor: Colors.purple,
                                       radius: 35,
                                       backgroundImage: NetworkImage(
-                                        document['image'][0],
+                                        document['image'],
                                       ),
                                     ),
                                   ],

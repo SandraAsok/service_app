@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,6 +27,29 @@ class _SignUpState extends State<SignUp> {
     setState(() {
       _obscureText = !_obscureText;
     });
+  }
+
+  String? errorMessage;
+
+  bool validateEmail(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        errorMessage = 'Please enter your email';
+      });
+      return false;
+    }
+    // Regular expression for validating an email
+    final regex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+    if (!regex.hasMatch(value)) {
+      setState(() {
+        errorMessage = 'Please enter a valid email address';
+      });
+      return false;
+    }
+    setState(() {
+      errorMessage = null;
+    });
+    return true;
   }
 
   @override
@@ -76,12 +101,14 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextField(
+                      child: TextFormField(
                         controller: _email,
+                        onChanged: validateEmail,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             label: Text('Email', style: black_style),
                             hintText: 'Type Here',
+                            errorText: errorMessage,
                             prefixIcon: const Icon(Icons.person),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -113,12 +140,10 @@ class _SignUpState extends State<SignUp> {
                           final SharedPreferences sharedPreferences =
                               await SharedPreferences.getInstance();
                           sharedPreferences.setBool('email', true);
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => BottomNav(),
-                          //     ));
+
                           signup();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Account created successfully")));
                         },
                         style: ButtonStyle(
                             side: MaterialStatePropertyAll<BorderSide>(
@@ -194,6 +219,14 @@ TextEditingController email = TextEditingController();
 TextEditingController password = TextEditingController();
 
 class _SignInState extends State<SignIn> {
+  bool _obscureText = true;
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     signin() async {
@@ -212,6 +245,29 @@ class _SignInState extends State<SignIn> {
       } catch (e) {
         log("ERROR : $e");
       }
+    }
+
+    String? errorMessage;
+
+    bool validateEmail(String value) {
+      if (value.isEmpty) {
+        setState(() {
+          errorMessage = 'Please enter your email';
+        });
+        return false;
+      }
+      // Regular expression for validating an email
+      final regex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+      if (!regex.hasMatch(value)) {
+        setState(() {
+          errorMessage = 'Please enter a valid email address';
+        });
+        return false;
+      }
+      setState(() {
+        errorMessage = null;
+      });
+      return true;
     }
 
     final size = MediaQuery.of(context).size;
@@ -243,13 +299,15 @@ class _SignInState extends State<SignIn> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TextField(
+                      child: TextFormField(
                         controller: email,
+                        onChanged: validateEmail,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.person),
                             label: const Text('Email'),
                             hintText: 'Type Here',
+                            errorText: errorMessage,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),
@@ -258,13 +316,20 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextField(
                         controller: password,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.lock),
-                            label: const Text('Password'),
-                            hintText: 'Type Here',
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20))),
+                          prefixIcon: const Icon(Icons.lock),
+                          label: const Text('Password'),
+                          hintText: 'Type Here',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          suffixIcon: IconButton(
+                            icon: Icon(_obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                            onPressed: _togglePasswordVisibility,
+                          ),
+                        ),
                       ),
                     ),
                     space,

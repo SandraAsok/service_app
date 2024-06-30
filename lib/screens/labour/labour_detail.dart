@@ -16,17 +16,16 @@ class LabourDetail extends StatefulWidget {
   final String address;
   final String phone;
   final String job;
-  final String category;
-  const LabourDetail(
-      {super.key,
-      required this.name,
-      required this.image,
-      required this.age,
-      required this.details,
-      required this.address,
-      required this.phone,
-      required this.job,
-      required this.category});
+  const LabourDetail({
+    super.key,
+    required this.name,
+    required this.image,
+    required this.age,
+    required this.details,
+    required this.address,
+    required this.phone,
+    required this.job,
+  });
 
   @override
   State<LabourDetail> createState() => _LabourDetailState();
@@ -58,7 +57,7 @@ class _LabourDetailState extends State<LabourDetail> {
               ListTile(
                 title: Row(
                   children: [
-                    const Text('Age:  ',
+                    const Text('Average Age Limit:  ',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     Text(widget.age)
                   ],
@@ -108,7 +107,6 @@ class _LabourDetailState extends State<LabourDetail> {
                               image: widget.image,
                               job: widget.job,
                               phone: widget.phone,
-                              category: widget.category,
                             ),
                           ));
                     },

@@ -13,17 +13,16 @@ class CalendarBooking extends StatefulWidget {
   final String image;
   final String job;
   final String phone;
-  final String category;
-  const CalendarBooking(
-      {super.key,
-      required this.labourName,
-      required this.labourAddress,
-      required this.labourAge,
-      required this.labourDetails,
-      required this.image,
-      required this.job,
-      required this.phone,
-      required this.category});
+  const CalendarBooking({
+    super.key,
+    required this.labourName,
+    required this.labourAddress,
+    required this.labourAge,
+    required this.labourDetails,
+    required this.image,
+    required this.job,
+    required this.phone,
+  });
 
   @override
   State<CalendarBooking> createState() => _CalendarBookingState();
@@ -31,6 +30,8 @@ class CalendarBooking extends StatefulWidget {
 
 class _CalendarBookingState extends State<CalendarBooking> {
   DateTime today = DateTime.now();
+  String? errorMessage;
+
   void onDayselected(selectedDay, focusedDay) {
     setState(() {
       today = selectedDay;
@@ -51,6 +52,27 @@ class _CalendarBookingState extends State<CalendarBooking> {
     });
   }
 
+  bool validatePhoneNumber(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        errorMessage = 'Please enter your phone number';
+      });
+      return false;
+    }
+    // Regular expression for validating a phone number with exactly 10 digits
+    final regex = RegExp(r'^\d{10}$');
+    if (!regex.hasMatch(value)) {
+      setState(() {
+        errorMessage = 'Please enter a valid 10-digit phone number';
+      });
+      return false;
+    }
+    setState(() {
+      errorMessage = null;
+    });
+    return true;
+  }
+
   TextEditingController name = TextEditingController();
   TextEditingController number = TextEditingController();
   TextEditingController notes = TextEditingController();
@@ -60,7 +82,6 @@ class _CalendarBookingState extends State<CalendarBooking> {
     try {
       await FirebaseFirestore.instance.collection('bookings').add({
         'userId': FirebaseAuth.instance.currentUser!.email,
-        'category': widget.category,
         'labour_name': widget.labourName,
         'age': widget.labourAge,
         'labour_address': widget.labourAddress,
@@ -76,7 +97,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
         'hours': counter,
       });
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
+        content: const Text(
           'Booked your service successfully',
           style: TextStyle(color: Colors.black),
         ),
@@ -88,7 +109,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
       ));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(
+        content: const Text(
           'Something went wrong',
           style: TextStyle(color: Colors.black),
         ),
@@ -113,8 +134,8 @@ class _CalendarBookingState extends State<CalendarBooking> {
                 style: GoogleFonts.oswald(
                     fontWeight: FontWeight.bold, color: theme_color),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 6.0, left: 8),
+              const Padding(
+                padding: EdgeInsets.only(top: 6.0, left: 8),
                 child: Icon(Icons.arrow_downward_outlined),
               )
             ],
@@ -130,14 +151,14 @@ class _CalendarBookingState extends State<CalendarBooking> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Selected Date',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Icon(Icons.calendar_month_outlined),
+                    const Icon(Icons.calendar_month_outlined),
                     Text(
                       '  :  ${today.toString().split(" ")[0]}',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -158,14 +179,14 @@ class _CalendarBookingState extends State<CalendarBooking> {
                       child: TableCalendar(
                         locale: "en_US",
                         rowHeight: 60,
-                        headerStyle: HeaderStyle(
+                        headerStyle: const HeaderStyle(
                             formatButtonVisible: false, titleCentered: true),
                         shouldFillViewport: true,
                         pageJumpingEnabled: true,
                         weekendDays: const [DateTime.saturday, DateTime.sunday],
                         selectedDayPredicate: (day) => isSameDay(day, today),
                         focusedDay: today,
-                        firstDay: DateTime.utc(2024, 01, 01),
+                        firstDay: DateTime.now(),
                         lastDay: DateTime.utc(2034, 12, 12),
                         onDaySelected: onDayselected,
                       ),
@@ -173,7 +194,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
@@ -189,11 +210,11 @@ class _CalendarBookingState extends State<CalendarBooking> {
                     child: Padding(
                       padding: const EdgeInsets.all(15),
                       child: ListTile(
-                        title: Text(
+                        title: const Text(
                           'Working Hours',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        subtitle: Text('Cost is per hour'),
+                        subtitle: const Text('Cost is per hour'),
                         trailing: SizedBox(
                           width: 110,
                           child: Row(
@@ -204,11 +225,11 @@ class _CalendarBookingState extends State<CalendarBooking> {
                                     onPressed: () {
                                       decrementCounter();
                                     },
-                                    icon: Icon(Icons.remove)),
+                                    icon: const Icon(Icons.remove)),
                               ),
                               Text(
                                 '$counter',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               CircleAvatar(
@@ -216,7 +237,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                                 onPressed: () {
                                   incrementCounter();
                                 },
-                                icon: Icon(Icons.add),
+                                icon: const Icon(Icons.add),
                               )),
                             ],
                           ),
@@ -226,7 +247,7 @@ class _CalendarBookingState extends State<CalendarBooking> {
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(),
               Card(
                 child: Container(
                   height: 200,
@@ -242,21 +263,21 @@ class _CalendarBookingState extends State<CalendarBooking> {
                     child: TextField(
                       controller: notes,
                       maxLines: 5,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Leave the service notes',
                       ),
                     ),
                   ),
                 ),
               ),
-              Divider(),
-              Text(
+              const Divider(),
+              const Text(
                 'For further verification',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Card(
                 child: Container(
-                  height: 80,
+                  height: 100,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -268,17 +289,17 @@ class _CalendarBookingState extends State<CalendarBooking> {
                     padding: const EdgeInsets.all(15),
                     child: TextField(
                       controller: name,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Your name',
                       ),
                     ),
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(),
               Card(
                 child: Container(
-                  height: 80,
+                  height: 100,
                   width: double.infinity,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -288,16 +309,19 @@ class _CalendarBookingState extends State<CalendarBooking> {
                           end: Alignment.topLeft)),
                   child: Padding(
                     padding: const EdgeInsets.all(15),
-                    child: TextField(
+                    child: TextFormField(
+                      onChanged: validatePhoneNumber,
+                      keyboardType: TextInputType.phone,
                       controller: number,
                       decoration: InputDecoration(
                         labelText: 'Your Phone',
+                        errorText: errorMessage,
                       ),
                     ),
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(),
               Card(
                 child: Container(
                   height: 200,
@@ -313,26 +337,46 @@ class _CalendarBookingState extends State<CalendarBooking> {
                     child: TextField(
                       controller: address,
                       maxLines: 5,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Your Address',
                       ),
                     ),
                   ),
                 ),
               ),
-              Divider(),
+              const Divider(),
               ElevatedButton(
                 onPressed: () {
-                  addBooking();
-                  name.clear();
-                  number.clear();
-                  notes.clear();
-                  address.clear();
-                  Navigator.pop(context);
+                  if (name.text.isEmpty ||
+                      number.text.isEmpty ||
+                      notes.text.isEmpty ||
+                      address.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("Alert !"),
+                        content: Text("Fields shouldn't be empty"),
+                        actions: [
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text("ok"))
+                        ],
+                      ),
+                    );
+                  } else {
+                    addBooking();
+                    name.clear();
+                    number.clear();
+                    notes.clear();
+                    address.clear();
+                    Navigator.pop(context);
+                  }
                 },
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.purple)),
-                child: Text(
+                child: const Text(
                   "Book",
                   style: TextStyle(color: Colors.black),
                 ),
