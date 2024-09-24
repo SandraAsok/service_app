@@ -156,14 +156,33 @@ class _SettingsState extends State<Settings> {
                           height: 60,
                           child: GestureDetector(
                             onTap: () async {
-                              FirebaseAuth.instance.signOut();
-                              final SharedPreferences sharedPreferences =
-                                  await SharedPreferences.getInstance();
-                              sharedPreferences.setBool('email', false);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) => SignUp())));
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  content: Text("are you sure ?"),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () {}, child: Text("No")),
+                                    TextButton(
+                                      onPressed: () async {
+                                        await FirebaseAuth.instance.signOut();
+                                        final SharedPreferences
+                                            sharedPreferences =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        sharedPreferences.setBool(
+                                            'email', false);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    SignUp())));
+                                      },
+                                      child: Text("yes"),
+                                    ),
+                                  ],
+                                ),
+                              );
                             },
                             child: const ListTile(
                               title: Text('Log out'),

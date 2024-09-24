@@ -227,6 +227,29 @@ class _SignInState extends State<SignIn> {
     });
   }
 
+  String? errortext;
+
+  bool validateloginEmail(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        errortext = 'Please enter your email';
+      });
+      return false;
+    }
+    // Regular expression for validating an email
+    final regex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
+    if (!regex.hasMatch(value)) {
+      setState(() {
+        errortext = 'Please enter a valid email address';
+      });
+      return false;
+    }
+    setState(() {
+      errortext = null;
+    });
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     signin() async {
@@ -245,29 +268,6 @@ class _SignInState extends State<SignIn> {
       } catch (e) {
         log("ERROR : $e");
       }
-    }
-
-    String? errorMessage;
-
-    bool validateEmail(String value) {
-      if (value.isEmpty) {
-        setState(() {
-          errorMessage = 'Please enter your email';
-        });
-        return false;
-      }
-      // Regular expression for validating an email
-      final regex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
-      if (!regex.hasMatch(value)) {
-        setState(() {
-          errorMessage = 'Please enter a valid email address';
-        });
-        return false;
-      }
-      setState(() {
-        errorMessage = null;
-      });
-      return true;
     }
 
     final size = MediaQuery.of(context).size;
@@ -301,13 +301,13 @@ class _SignInState extends State<SignIn> {
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
                         controller: email,
-                        onChanged: validateEmail,
+                        onChanged: validateloginEmail,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             prefixIcon: const Icon(Icons.person),
                             label: const Text('Email'),
                             hintText: 'Type Here',
-                            errorText: errorMessage,
+                            errorText: errortext,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20))),
                       ),

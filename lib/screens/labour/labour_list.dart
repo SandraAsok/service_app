@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:service_app/screens/bookings/calendarbooking.dart';
 import 'package:service_app/screens/labour/labour_detail.dart';
 import 'package:service_app/utilities/utilities.dart';
@@ -10,10 +11,14 @@ import 'package:url_launcher/url_launcher.dart';
 
 class LabourList extends StatefulWidget {
   final String job;
+  final List selectedItems;
+  final num totalprice;
 
   const LabourList({
     super.key,
     required this.job,
+    required this.selectedItems,
+    required this.totalprice,
   });
 
   @override
@@ -61,6 +66,8 @@ class _LabourListState extends State<LabourList> {
                                       address: document['address'],
                                       phone: document['phone'],
                                       job: document['job'],
+                                      selectedItems: widget.selectedItems,
+                                      totalprice: widget.totalprice,
                                     ),
                                     fullscreenDialog: true,
                                   ),
@@ -112,6 +119,8 @@ class _LabourListState extends State<LabourList> {
                                             CupertinoPageRoute(
                                               builder: (context) =>
                                                   CalendarBooking(
+                                                selectedItems:
+                                                    widget.selectedItems,
                                                 labourName: document['name'],
                                                 labourAddress:
                                                     document['address'],
@@ -121,6 +130,7 @@ class _LabourListState extends State<LabourList> {
                                                 image: document['image'],
                                                 job: document['job'],
                                                 phone: document['phone'],
+                                                totalprice: widget.totalprice,
                                               ),
                                             ));
                                       },

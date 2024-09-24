@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:service_app/utilities/utilities.dart';
 
-class ShopBooking extends StatelessWidget {
+class ShopsList extends StatelessWidget {
   final String shop;
-  const ShopBooking({super.key, required this.shop});
+  const ShopsList({super.key, required this.shop});
 
   @override
   Widget build(BuildContext context) {

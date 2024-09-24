@@ -166,8 +166,7 @@ class _CalendarState extends State<Calendar> {
                                                         .collection('feedbacks')
                                                         .add({
                                                       'review': review.text,
-                                                      'category':
-                                                          document['category'],
+                                                      'job': document['job'],
                                                       'labour_name': document[
                                                           'labour_name'],
                                                       'userID': FirebaseAuth
@@ -210,7 +209,7 @@ class _CalendarState extends State<Calendar> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                              '${document['category']} - ${document['labour_name']}',
+                                              '${document['job']} - ${document['labour_name']}',
                                               style: normalStyle),
                                           Text(
                                               'Total working hours : ${document['hours']}',

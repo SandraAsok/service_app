@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:service_app/screens/labour/labour_list.dart';
+import 'package:service_app/screens/services/subservicelist.dart';
 import 'package:service_app/utilities/utilities.dart';
 
 class AllServices extends StatefulWidget {
@@ -58,8 +58,8 @@ class _AllServicesState extends State<AllServices> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      LabourList(job: document['service']),
+                                  builder: (context) => SubServiceList(
+                                      service: document['service']),
                                   fullscreenDialog: true));
                         },
                         child: Container(

@@ -16,6 +16,8 @@ class LabourDetail extends StatefulWidget {
   final String address;
   final String phone;
   final String job;
+  final List selectedItems;
+  final num totalprice;
   const LabourDetail({
     super.key,
     required this.name,
@@ -25,6 +27,8 @@ class LabourDetail extends StatefulWidget {
     required this.address,
     required this.phone,
     required this.job,
+    required this.selectedItems,
+    required this.totalprice,
   });
 
   @override
@@ -107,6 +111,8 @@ class _LabourDetailState extends State<LabourDetail> {
                               image: widget.image,
                               job: widget.job,
                               phone: widget.phone,
+                              selectedItems: widget.selectedItems,
+                              totalprice: widget.totalprice,
                             ),
                           ));
                     },

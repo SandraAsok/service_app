@@ -4,30 +4,32 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:service_app/screens/bookings/calender.dart';
-import 'package:service_app/screens/cart/cart.dart';
 import 'package:service_app/screens/home/home.dart';
+import 'package:service_app/screens/search/search.dart';
 import 'package:service_app/screens/settings/settings.dart';
 import 'package:service_app/screens/welcome.dart';
 import 'package:service_app/utilities/utilities.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: "AIzaSyCKRz2BwiB_VWW68Fmtb-e3A_vZhEeXteM",
       appId: "1:632744309940:android:063901222a9068f27393e1",
       messagingSenderId: "632744309940",
       projectId: "atozservice-b6c16",
+      storageBucket: "atozservice-b6c16.appspot.com",
     ),
   );
+
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Splash(),
   ));
 }
 
-bool? finalemail;
+bool finalemail = false;
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -66,12 +68,12 @@ class _SplashState extends State<Splash> {
     setState(() {
       finalemail = obtainedEmail!;
     });
-    log(finalemail!.toString());
+    log(finalemail.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Welcome();
+    return const Placeholder();
   }
 }
 
@@ -84,8 +86,8 @@ class BottomNav extends StatefulWidget {
 
 final List<Widget> _pages = [
   const Home(),
+  const Search(),
   const Calendar(),
-  const Cart(),
   const Settings(),
 ];
 
@@ -103,19 +105,18 @@ class _BottomNavState extends State<BottomNav> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: GNav(
-          backgroundColor: theme_color.withOpacity(0.7),
+          padding: const EdgeInsets.all(15),
+          rippleColor: theme_color.withOpacity(0.5),
+          curve: Curves.bounceIn,
+          backgroundColor: theme_color.withOpacity(0.5),
           selectedIndex: _currentIndex,
           activeColor: Colors.white,
           onTabChange: _onTabTapped,
-          tabs: [
-            GButton(
-                backgroundColor: theme_color.withOpacity(0.7),
-                icon: Icons.home,
-                text: 'Home'),
-            const GButton(
-                icon: Icons.calendar_month_outlined, text: 'Bookings'),
-            const GButton(icon: Icons.shopping_cart, text: 'Cart'),
-            const GButton(icon: Icons.settings, text: 'Settings'),
+          tabs: const [
+            GButton(icon: Icons.home, text: 'Home'),
+            GButton(icon: Icons.search, text: 'Search'),
+            GButton(icon: Icons.calendar_month_outlined, text: 'Bookings'),
+            GButton(icon: Icons.settings, text: 'Settings'),
           ]),
     );
   }
