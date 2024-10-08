@@ -3,3 +3,6 @@
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningActivityStarter$Error
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningActivityStarter
 -dontwarn com.stripe.android.pushProvisioning.PushProvisioningEphemeralKeyProvider
+-dontwarn net.jcip.annotations.Immutable
+-dontwarn net.jcip.annotations.NotThreadSafe
+-dontwarn net.jcip.annotations.ThreadSafe

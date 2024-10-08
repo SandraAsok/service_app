@@ -236,7 +236,6 @@ class _SignInState extends State<SignIn> {
       });
       return false;
     }
-    // Regular expression for validating an email
     final regex = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
     if (!regex.hasMatch(value)) {
       setState(() {
@@ -248,6 +247,24 @@ class _SignInState extends State<SignIn> {
       errortext = null;
     });
     return true;
+  }
+
+  Future<void> _resetPassword() async {
+    if (!validateloginEmail(email.text)) return;
+
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Password reset link sent to ${email.text}"),
+        backgroundColor: Colors.green,
+      ));
+    } catch (e) {
+      log("Error resetting password: $e");
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Error: Unable to send reset email"),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 
   @override
@@ -332,7 +349,15 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                     ),
-                    space,
+                    const SizedBox(height: 20),
+                    TextButton(
+                      onPressed: _resetPassword,
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(color: theme_color),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                         onPressed: () async {
                           final SharedPreferences sharedPreferences =
@@ -348,7 +373,7 @@ class _SignInState extends State<SignIn> {
                             textStyle: MaterialStatePropertyAll<TextStyle>(
                                 hint_style)),
                         child: const Text("Sign In")),
-                    space,
+                    const SizedBox(height: 20),
                   ],
                 ),
               )
