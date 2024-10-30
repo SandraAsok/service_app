@@ -19,62 +19,64 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: TextFormField(
-                  controller: productcontroller,
-                  onChanged: filterCategory,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.cancel)),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: Colors.black)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: Colors.black)),
-                  )),
-            ),
-            StreamBuilder(
-                stream: FirebaseFirestore.instance
-                    .collection('services')
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    log(snapshot.error.toString());
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const Center(child: LinearProgressIndicator());
-                  }
-                  availableCategories = snapshot.data!.docs;
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: filteredCategories.length,
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemBuilder: (context, index) {
-                      final document = filteredCategories[index];
-                      return ListTile(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SubServiceList(
-                                      service: document['service']),
-                                  fullscreenDialog: true));
-                        },
-                        leading: CircleAvatar(
-                          radius: 30,
-                          backgroundImage: NetworkImage(document['cover']),
-                        ),
-                        title: Text(document['service']),
-                      );
-                    },
-                  );
-                })
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                    controller: productcontroller,
+                    onChanged: filterCategory,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      suffixIcon: IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.cancel)),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.black)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(color: Colors.black)),
+                    )),
+              ),
+              StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('services')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      log(snapshot.error.toString());
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Center(child: LinearProgressIndicator());
+                    }
+                    availableCategories = snapshot.data!.docs;
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: filteredCategories.length,
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemBuilder: (context, index) {
+                        final document = filteredCategories[index];
+                        return ListTile(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SubServiceList(
+                                        service: document['service']),
+                                    fullscreenDialog: true));
+                          },
+                          leading: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: NetworkImage(document['cover']),
+                          ),
+                          title: Text(document['service']),
+                        );
+                      },
+                    );
+                  })
+            ],
+          ),
         ),
       ),
     );

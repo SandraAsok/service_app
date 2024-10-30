@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:service_app/screens/Login/login.dart';
 import 'package:service_app/screens/settings/popup.dart';
 import 'package:service_app/utilities/utilities.dart';
@@ -23,15 +24,8 @@ class _SettingsState extends State<Settings> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    height: 200,
-                    width: 200,
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.purple)),
-                    child: const Center(child: Text("logo")),
-                  ),
-                ),
+                    padding: const EdgeInsets.all(10.0),
+                    child: Lottie.asset("assets/settings.json")),
                 space,
                 ListView(
                   shrinkWrap: true,
